@@ -13,6 +13,7 @@ class InputForm extends Component {
 		this.addCategory = this.addCategory.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.delCategory = this.delCategory.bind(this);
+		this.renameCategory = this.renameCategory.bind(this);
 	}
 
 	addCategory(event) {
@@ -31,22 +32,37 @@ class InputForm extends Component {
 			});
 
 			this.setState({
-				items: itemsArray
+				items: itemsArray,
+				value: ''
 			});
 			// this.CategoryTitle.value = "";
-			this.state.value = '';
+			// this.state.value = '';
 			// console.log(this.state.items);
 		}
 	}
 
 	delCategory(key) {
-  	let filteredItems = this.state.items.filter(function (item) {
-   		return (item.key !== key);
-  	});
+  	let filteredItems = this.state.items.filter(item => item.key !== key);
 
   	this.setState({
 			items: filteredItems
 		});
+  }
+
+  renameCategory(key, newCategoryTitle) {
+  	let renamedItem = this.state.items.map(function (item) {
+  		if (item.key === key) {
+  			item.text = newCategoryTitle;
+  		};
+  		return item
+  	});
+
+  	// console.log(renamedItem[0].text);
+  	// renamedItem[0].text = 'NEW CATEGORY';
+  	// console.log(renamedItem[0].text);
+  	this.setState({
+  		items: renamedItem
+  	});
   }
 
 	handleInputChange(event) {
@@ -68,6 +84,7 @@ class InputForm extends Component {
       	<CategoryTree 
       		entries={this.state.items} 
       		deleted={this.delCategory}
+      		rename={this.renameCategory}
       	/>
       </form>
     );
