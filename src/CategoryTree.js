@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import InputForm from './InputForm';
 
 class CategoryTree extends Component {
 	constructor(props) {
@@ -7,6 +6,7 @@ class CategoryTree extends Component {
 		this.createCategory = this.createCategory.bind(this);
 		this.deleteCategory = this.deleteCategory.bind(this);
 		this.renameCategory = this.renameCategory.bind(this);
+		this.addChildCategory = this.addChildCategory.bind(this);
 	}
 
 	deleteCategory(key) {
@@ -15,7 +15,12 @@ class CategoryTree extends Component {
 
 	renameCategory(key) {
 		let newCategoryTitle = prompt('Enter new category title');
-		this.props.rename(key,newCategoryTitle);
+		this.props.rename(key, newCategoryTitle);
+	}
+
+	addChildCategory(key) {
+		let newCategoryTitle = prompt('Enter new category title');
+		this.props.addChild(key, newCategoryTitle);
 	}
 
 	createCategory(item) {
@@ -28,13 +33,16 @@ class CategoryTree extends Component {
 				<button onClick={() => this.deleteCategory(item.key)}>
 					X
 				</button>
+				<button onClick={() => this.addChildCategory(item.key)}>
+					+
+				</button>
 			</li>
 		);
 	}
 	
   render() {
-  	// console.log(this.props.entries);
   	let listCategory = this.props.entries.map(this.createCategory);
+
     return (
 			<ul>
 				{listCategory}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CategoryTree from './CategoryTree';
-// import './InputForm.css';
 
 class InputForm extends Component {
 	constructor(props) {
@@ -10,22 +9,19 @@ class InputForm extends Component {
 			items: [{text: 'CategoryTest', key: 0}],
 			id: 0,
 		};
+
 		this.addCategory = this.addCategory.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.delCategory = this.delCategory.bind(this);
 		this.renameCategory = this.renameCategory.bind(this);
+		this.addChildCategory = this.addChildCategory.bind(this);
 	}
 
 	addCategory(event) {
 		event.preventDefault();
 		if (this.CategoryTitle.value !== '') {
 			this.state.id++;
-			// console.log(this.state.id);
-			// console.log('submitted');
-			// console.log('This category title is ' + this.CategoryTitle.value);
-
 			let itemsArray = this.state.items;
-			// console.log(this.CategoryTitle);
 			itemsArray.push({
 				text: this.CategoryTitle.value,
 				key: this.state.id
@@ -35,9 +31,6 @@ class InputForm extends Component {
 				items: itemsArray,
 				value: ''
 			});
-			// this.CategoryTitle.value = "";
-			// this.state.value = '';
-			// console.log(this.state.items);
 		}
 	}
 
@@ -50,19 +43,35 @@ class InputForm extends Component {
   }
 
   renameCategory(key, newCategoryTitle) {
-  	let renamedItem = this.state.items.map(function (item) {
-  		if (item.key === key) {
-  			item.text = newCategoryTitle;
-  		};
-  		return item
-  	});
+  	if (newCategoryTitle !== '' && newCategoryTitle) {
+	  	let renamedItem = this.state.items.map(function (item) {
+		  	if (item.key === key) {
+		  			item.text = newCategoryTitle;
+		  	}
+		  	return item
+	  	});
 
-  	// console.log(renamedItem[0].text);
-  	// renamedItem[0].text = 'NEW CATEGORY';
-  	// console.log(renamedItem[0].text);
-  	this.setState({
-  		items: renamedItem
-  	});
+	  	this.setState({
+	  		items: renamedItem
+	  	});
+  	}
+  }
+
+  addChildCategory(key, newCategoryTitle) {
+  	if (newCategoryTitle !== '' && newCategoryTitle) {
+			this.state.id++;
+
+			let itemsArray = this.state.items;
+			itemsArray.splice(++key, 0, {
+				text: newCategoryTitle,
+				key: this.state.id
+			});
+
+			this.setState({
+				items: itemsArray,
+				value: ''
+			});
+		}
   }
 
 	handleInputChange(event) {
@@ -78,13 +87,14 @@ class InputForm extends Component {
        		placeholder='Enter category title'
        		value={this.state.value}
        		onChange={this.handleInputChange}
-       		ref={(input) => this.CategoryTitle = input}
+       		ref={input => this.CategoryTitle = input}
         />
       	<button type='submit'>Add</button>
       	<CategoryTree 
       		entries={this.state.items} 
       		deleted={this.delCategory}
       		rename={this.renameCategory}
+      		addChild={this.addChildCategory}
       	/>
       </form>
     );
