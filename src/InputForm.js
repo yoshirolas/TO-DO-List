@@ -32,6 +32,7 @@ class InputForm extends Component {
 				value: ''
 			});
 		}
+		// console.log(this.state.items);
 	}
 
 	delCategory(key) {
@@ -62,7 +63,9 @@ class InputForm extends Component {
 			this.state.id++;
 
 			let itemsArray = this.state.items;
-			itemsArray.splice(++key, 0, {
+			let posInItemsArray = itemsArray.findIndex((item) => item.key === key);
+			posInItemsArray += 1;
+			itemsArray.splice(posInItemsArray, 0, {
 				text: newCategoryTitle,
 				key: this.state.id
 			});
