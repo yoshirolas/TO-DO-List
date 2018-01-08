@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './CategoryTree.css';
 
 class CategoryTree extends Component {
 	constructor(props) {
@@ -24,27 +25,52 @@ class CategoryTree extends Component {
 	}
 
 	createCategory(item) {
-		return (
-			<li key={item.key}>
-				{item.text}
-				<button onClick={() => this.renameCategory(item.key)}>
-					V
-				</button>				
-				<button onClick={() => this.deleteCategory(item.key)}>
-					X
-				</button>
-				<button onClick={() => this.addChildCategory(item.key)}>
-					+
-				</button>
-			</li>
-		);
+		if (!item.child) {
+			return (
+				<li key={item.key} className="parentCategory">
+					{item.text}
+					<button 
+						className="renameBtn"
+						onClick={() => this.renameCategory(item.key)}>
+						V
+					</button>				
+					<button 
+						className="deleteBtn"
+						onClick={() => this.deleteCategory(item.key)}>
+						X
+					</button>
+					<button 
+						className="addBtn"
+						onClick={() => this.addChildCategory(item.key)}>
+						+
+					</button>
+				</li>
+			);
+		} else {
+			return (
+				<li key={item.key} className="childCategory">
+					{item.text}
+					<button
+						className="renameBtn"
+						onClick={() => this.renameCategory(item.key)}>
+						V
+					</button>				
+					<button 
+						className="deleteBtn"
+						onClick={() => this.deleteCategory(item.key)}>
+						X
+					</button>
+				</li>
+			);
+		}
 	}
 	
   render() {
+  	console.log(this.props.entries);
   	let listCategory = this.props.entries.map(this.createCategory);
 
     return (
-			<ul>
+			<ul className="listCategory">
 				{listCategory}
 			</ul>
     );

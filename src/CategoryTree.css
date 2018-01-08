@@ -1,0 +1,28 @@
+.parentCategory {
+	background: yellow;
+	display: block;
+	width: 100%;
+}
+
+.childCategory {
+	background: red;
+	display: block;
+	width: 100%;
+}
+
+.listCategory {
+	display: block;
+	width: 100%;
+}
+
+.renameBtn {
+	padding: 5px;
+}
+
+.deleteBtn {
+	padding: 5px;
+}
+
+.addBtn {
+	padding: 5px;
+}
