@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './TaskTree.css';
+import './TaskTree.css';
 
 class TaskTree extends Component {
 	constructor(props) {
@@ -8,16 +8,22 @@ class TaskTree extends Component {
 	}
 
 	createTask(item) {
+		// console.log(item);
 		return (
-			<li key={item.key} className="parentTask">
-				{item.tasks}
+			<li key={item.key} className="taskItem">
+				{item.taskText}
 			</li>
 		);
 	}
 	
   render() {
-  	console.log(this.props.entriesTask);
-  	let listTask = this.props.entriesTask.map(this.createTask);
+  	console.log(this.props.entries);
+  	console.log(this.props.entries.taskItem);
+
+  	const categoryFocus = this.props.entries.categoryFocus;
+  	const taskList = this.props.entries.taskItem;
+  	const taskFilter = taskList.filter(item => item.parentCategory === categoryFocus);
+  	let listTask = taskFilter.map(this.createTask);
 
     return (
 			<ul className="listTask">

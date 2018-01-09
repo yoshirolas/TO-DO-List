@@ -8,6 +8,7 @@ class CategoryTree extends Component {
 		this.deleteCategory = this.deleteCategory.bind(this);
 		this.renameCategory = this.renameCategory.bind(this);
 		this.addChildCategory = this.addChildCategory.bind(this);
+		this.showCategoryTasks = this.showCategoryTasks.bind(this);
 	}
 
 	deleteCategory(key) {
@@ -24,11 +25,19 @@ class CategoryTree extends Component {
 		this.props.addChild(key, newCategoryTitle);
 	}
 
+	showCategoryTasks(key) {
+		this.props.showTasks(key);
+	}
+
 	createCategory(item) {
 		if (!item.child) {
 			return (
-				<li key={item.key} className="parentCategory">
-					{item.text}
+				<li 
+					key={item.key} 
+					className="parentCategory"
+					onClick={() => this.showCategoryTasks(item.key)}
+				>
+					{item.categoryText}
 					<button 
 						className="renameBtn"
 						onClick={() => this.renameCategory(item.key)}>
@@ -48,8 +57,12 @@ class CategoryTree extends Component {
 			);
 		} else {
 			return (
-				<li key={item.key} className="childCategory">
-					{item.text}
+				<li 
+					key={item.key} 
+					className="childCategory"
+					onClick={() => this.showCategoryTasks(item.key)}
+				>
+					{item.categoryText}
 					<button
 						className="renameBtn"
 						onClick={() => this.renameCategory(item.key)}>
@@ -66,7 +79,6 @@ class CategoryTree extends Component {
 	}
 	
   render() {
-  	console.log(this.props.entries);
   	let listCategory = this.props.entries.map(this.createCategory);
 
     return (
