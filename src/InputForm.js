@@ -25,8 +25,11 @@ class InputForm extends Component {
 					taskText: 'My first task0', 
 					key: 0, 
 					parentCategory:0,
+					done: false,
 				},
 			],
+
+			searchInputValue: '',
 		};
 
 		this.addCategory = this.addCategory.bind(this);
@@ -38,6 +41,10 @@ class InputForm extends Component {
 
 		this.addTask = this.addTask.bind(this);
 		this.handleTaskInputChange = this.handleTaskInputChange.bind(this);
+		this.editTask = this.editTask.bind(this);
+		this.doneTask = this.doneTask.bind(this);
+
+		this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
 	}
 
 	addCategory(event) {
@@ -133,9 +140,58 @@ class InputForm extends Component {
 		this.setState({taskInputValue: event.target.value});
 	}
 
+	handleSearchInputChange(event) {
+		let serchQuery = event.target.value;
+		console.log(serchQuery);
+		let searchedTasks = this.state.taskItem.filter((item => item.taskText.indexOf(serchQuery)!==-1))
+		console.log(searchedTasks);
+
+		this.setState({
+				taskItem: searchedTasks,
+				searchInputValue: event.target.value
+			});
+
+	}
+
+	editTask(key, newTask) {
+  	if (newTask !== '' && newTask) {
+	  	let editTaskItem = this.state.taskItem.map(function (item) {
+		  	if (item.key === key) {
+		  			item.taskText = newTask;
+		  	}
+		  	return item
+	  	});
+
+	  	this.setState({
+	  		taskItem: editTaskItem
+	  	});
+  	}
+  }
+
+  doneTask(key) {
+		let doneTaskItem = this.state.taskItem.map(function (item) {
+	  	if (item.key === key) {
+	  			item.done = !item.done;
+	  	}
+	  	return item
+  	});
+
+  	this.setState({
+  		taskItem: doneTaskItem
+  	});
+  }
+
   render() {
     return (
     	<main>
+    		<article className="search">
+    			<input
+		     		type='text'
+		     		placeholder='Enter search query'
+		     		value={this.state.searchInputValue}
+		     		onChange={this.handleSearchInputChange}
+				  />	
+    		</article>
 	    	<section className="renderingInputForm">
 	    		<article className="categoryInput">
 		    		<form onSubmit={this.addCategory}> 
