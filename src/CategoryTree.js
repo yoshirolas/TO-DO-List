@@ -4,6 +4,10 @@ import './CategoryTree.css';
 class CategoryTree extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			clicked: false,
+		};
+
 		this.createCategory = this.createCategory.bind(this);
 		this.deleteCategory = this.deleteCategory.bind(this);
 		this.renameCategory = this.renameCategory.bind(this);
@@ -26,15 +30,23 @@ class CategoryTree extends Component {
 	}
 
 	showCategoryTasks(key) {
+		console.log(this.highLight.style);
+		this.setState({
+				clicked: !this.state.clicked
+			});
 		this.props.showTasks(key);
 	}
 
 	createCategory(item) {
+		if (this.state.clicked) {
+			alert('asd')
+		}
 		if (!item.child) {
 			return (
 				<li 
 					key={item.key} 
 					className="parentCategory"
+					ref={item => this.highLight = item}
 					onClick={() => this.showCategoryTasks(item.key)}
 				>
 					{item.categoryText}

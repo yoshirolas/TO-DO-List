@@ -109,6 +109,7 @@ class App extends Component {
   }
 
   showCategoryTasks(key) {
+  	console.log(this.state.categoryItem[key]);
   	this.setState({
 				categoryFocus: key,
 			});
