@@ -6,11 +6,28 @@
 	border: 1px solid black;
 }
 
+.parentCategoryClicked {
+	background: gray;
+	display: block;
+	width: 100%;
+	height: 50px;
+	border: 1px solid black;
+}
+
 .childCategory {
 	background: red;
 	display: block;
 	width: 100%;
 	height: 50px;
+	border: 1px solid black;
+}
+
+.childCategoryClicked {
+	background: gray;
+	display: block;
+	width: 100%;
+	height: 50px;
+	border: 1px solid black;
 }
 
 .listCategory {

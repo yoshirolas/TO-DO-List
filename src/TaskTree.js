@@ -19,7 +19,6 @@ class TaskTree extends Component {
 	}
 
 	createTask(item) {
-		// console.log(item);
 		return (
 			<li key={item.key} className="taskItem">
 				{item.taskText}
@@ -37,9 +36,6 @@ class TaskTree extends Component {
 	}
 	
   render() {
-  	// console.log(this.props.entries);
-  	// console.log(this.props.entries.taskItem);
-
   	const categoryFocus = this.props.entries.categoryFocus;
   	const taskList = this.props.entries.taskItem;
   	const taskFilter = taskList.filter(item => item.parentCategory === categoryFocus);

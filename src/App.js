@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import CategoryTree from './CategoryTree';
 import TaskTree from './TaskTree';
+import Search from './Search';
 
 class App extends Component {
 	constructor(props) {
@@ -15,6 +16,7 @@ class App extends Component {
 					categoryText: 'CategoryTest', 
 					key: 0, 
 					child: null,
+					clicked: false,
 				}
 			],
 
@@ -28,8 +30,6 @@ class App extends Component {
 					done: false,
 				},
 			],
-
-			searchInputValue: '',
 		};
 
 		this.addCategory = this.addCategory.bind(this);
@@ -44,7 +44,7 @@ class App extends Component {
 		this.editTask = this.editTask.bind(this);
 		this.doneTask = this.doneTask.bind(this);
 
-		this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
+		this.showSearchedTasks = this.showSearchedTasks.bind(this);
 	}
 
 	addCategory(event) {
@@ -77,7 +77,7 @@ class App extends Component {
   	if (newCategoryTitle !== '' && newCategoryTitle) {
 	  	let renamedItem = this.state.categoryItem.map(function (item) {
 		  	if (item.key === key) {
-		  			item.categoryText = newCategoryTitle;
+		  		item.categoryText = newCategoryTitle;
 		  	}
 		  	return item
 	  	});
@@ -111,8 +111,8 @@ class App extends Component {
   showCategoryTasks(key) {
   	console.log(this.state.categoryItem[key]);
   	this.setState({
-				categoryFocus: key,
-			});
+			categoryFocus: key,
+		});
   }
 
   addTask(event) {
@@ -141,19 +141,6 @@ class App extends Component {
 		this.setState({taskInputValue: event.target.value});
 	}
 
-	handleSearchInputChange(event) {
-		let serchQuery = event.target.value;
-		console.log(serchQuery);
-		let searchedTasks = this.state.taskItem.filter((item => item.taskText.indexOf(serchQuery)!==-1))
-		console.log(searchedTasks);
-
-		this.setState({
-				taskItem: searchedTasks,
-				searchInputValue: event.target.value
-			});
-
-	}
-
 	editTask(key, newTask) {
   	if (newTask !== '' && newTask) {
 	  	let editTaskItem = this.state.taskItem.map(function (item) {
@@ -172,7 +159,7 @@ class App extends Component {
   doneTask(key) {
 		let doneTaskItem = this.state.taskItem.map(function (item) {
 	  	if (item.key === key) {
-	  			item.done = !item.done;
+	  		item.done = !item.done;
 	  	}
 	  	return item
   	});
@@ -182,17 +169,20 @@ class App extends Component {
   	});
   }
 
+  showSearchedTasks(items) {
+  	this.setState({
+  		taskItem: items,
+  	});
+  }
+
   render() {
     return (
     	<main>
-    		<article className="search">
-    			<input
-		     		type='text'
-		     		placeholder='Enter search query'
-		     		value={this.state.searchInputValue}
-		     		onChange={this.handleSearchInputChange}
-				  />	
-    		</article>
+    		<Search 
+    			entries={this.state.taskItem}
+    			showSearchResult={this.showSearchedTasks}
+    			categoryFocus={this.state.categoryFocus}
+    		/>
 	    	<section className="renderingInputForm">
 	    		<article className="categoryInput">
 		    		<form onSubmit={this.addCategory}> 

@@ -4,9 +4,10 @@ import './CategoryTree.css';
 class CategoryTree extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			clicked: false,
-		};
+			categoryList: this.props.entries,
+		}
 
 		this.createCategory = this.createCategory.bind(this);
 		this.deleteCategory = this.deleteCategory.bind(this);
@@ -30,22 +31,40 @@ class CategoryTree extends Component {
 	}
 
 	showCategoryTasks(key) {
-		console.log(this.highLight.style);
+		let clickedCategory = this.props.entries.map(function (item) {
+		  if (item.key === key) {
+		  	item.clicked = true;
+		  }
+		  return item
+	  });
+		let unclickedCategory = this.props.entries.map(function (item) {
+		  if (item.key !== key) {
+		  	item.clicked = false;
+		  }
+		  return item
+	  });
+
 		this.setState({
-				clicked: !this.state.clicked
-			});
+			categoryList: clickedCategory,
+		});
 		this.props.showTasks(key);
 	}
 
 	createCategory(item) {
-		if (this.state.clicked) {
-			alert('asd')
+		let parentCategoryName;
+		let childCategoryName;
+		if (item.clicked) {
+			parentCategoryName = 'parentCategoryClicked'
+			childCategoryName = 'childCategoryClicked'
+		} else {
+			parentCategoryName = 'parentCategory'
+			childCategoryName = 'childCategory'
 		}
 		if (!item.child) {
 			return (
 				<li 
 					key={item.key} 
-					className="parentCategory"
+					className={parentCategoryName}
 					ref={item => this.highLight = item}
 					onClick={() => this.showCategoryTasks(item.key)}
 				>
@@ -71,7 +90,7 @@ class CategoryTree extends Component {
 			return (
 				<li 
 					key={item.key} 
-					className="childCategory"
+					className={childCategoryName}
 					onClick={() => this.showCategoryTasks(item.key)}
 				>
 					{item.categoryText}
@@ -90,8 +109,14 @@ class CategoryTree extends Component {
 		}
 	}
 	
+	componentWillReceiveProps(nextProps) {
+    this.setState({
+      categoryList: nextProps.entries,
+    });
+  }
+
   render() {
-  	let listCategory = this.props.entries.map(this.createCategory);
+  	let listCategory = this.state.categoryList.map(this.createCategory);
 
     return (
 			<ul className="listCategory">
