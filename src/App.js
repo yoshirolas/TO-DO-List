@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import CategoryTree from './CategoryTree';
-import TaskTree from './TaskTree';
+import TaskField from './TaskField';
 import Search from './Search';
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
 			categoryInputValue: '',
 			categoryId: 0,
 			categoryFocus: 0,
-			categoryItem: [
+			categoryList: [
 				{
 					categoryText: 'CategoryTest', 
 					key: 0, 
@@ -22,11 +22,11 @@ class App extends Component {
 
 			taskId: 0,
 			taskInputValue: '',
-			taskItem: [
+			taskList: [
 				{
 					taskText: 'My first task0', 
 					key: 0, 
-					parentCategory:0,
+					parentCategory: 0,
 					done: false,
 				},
 			],
@@ -39,43 +39,42 @@ class App extends Component {
 		this.addChildCategory = this.addChildCategory.bind(this);
 		this.showCategoryTasks = this.showCategoryTasks.bind(this);
 
-		this.addTask = this.addTask.bind(this);
-		this.handleTaskInputChange = this.handleTaskInputChange.bind(this);
-		this.editTask = this.editTask.bind(this);
-		this.doneTask = this.doneTask.bind(this);
-
 		this.showSearchedTasks = this.showSearchedTasks.bind(this);
+		this.showEditTaskList = this.showEditTaskList.bind(this);
+		this.showCompletedTaskList = this.showCompletedTaskList.bind(this);
+		this.showNewTask = this.showNewTask.bind(this);
+		this.showNewTaskInput = this.showNewTaskInput.bind(this);
 	}
 
 	addCategory(event) {
 		event.preventDefault();
 		if (this.CategoryTitle.value !== '') {
 			this.state.categoryId++;
-			let categoryItemArray = this.state.categoryItem;
-			categoryItemArray.push({
+			let categoryListArray = this.state.categoryList;
+			categoryListArray.push({
 				categoryText: this.CategoryTitle.value,
 				key: this.state.categoryId,
 				child: null,
 			});
 
 			this.setState({
-				categoryItem: categoryItemArray,
+				categoryList: categoryListArray,
 				categoryInputValue: ''
 			});
 		}
 	}
 
 	deleteCategory(key) {
-  	let filteredcategoryItem = this.state.categoryItem.filter(item => item.key !== key);
+  	let filteredcategoryList = this.state.categoryList.filter(item => item.key !== key);
 
   	this.setState({
-			categoryItem: filteredcategoryItem
+			categoryList: filteredcategoryList
 		});
   }
 
   renameCategory(key, newCategoryTitle) {
   	if (newCategoryTitle !== '' && newCategoryTitle) {
-	  	let renamedItem = this.state.categoryItem.map(function (item) {
+	  	let renamedItem = this.state.categoryList.map(function (item) {
 		  	if (item.key === key) {
 		  		item.categoryText = newCategoryTitle;
 		  	}
@@ -83,7 +82,7 @@ class App extends Component {
 	  	});
 
 	  	this.setState({
-	  		categoryItem: renamedItem
+	  		categoryList: renamedItem
 	  	});
   	}
   }
@@ -92,86 +91,61 @@ class App extends Component {
   	if (newCategoryTitle !== '' && newCategoryTitle) {
 			this.state.categoryId++;
 
-			let categoryItemArray = this.state.categoryItem;
-			let posInCategoryItemArray = categoryItemArray.findIndex((item) => item.key === key);
-			posInCategoryItemArray += 1;
-			categoryItemArray.splice(posInCategoryItemArray, 0, {
+			let categoryListArray = this.state.categoryList;
+			let posIncategoryListArray = categoryListArray.findIndex((item) => item.key === key);
+			posIncategoryListArray += 1;
+			categoryListArray.splice(posIncategoryListArray, 0, {
 				categoryText: newCategoryTitle,
 				key: this.state.categoryId,
 				child: 1,
 			});
 
 			this.setState({
-				categoryItem: categoryItemArray,
+				categoryList: categoryListArray,
 				categoryInputValue: ''
 			});
 		}
   }
 
   showCategoryTasks(key) {
-  	console.log(this.state.categoryItem[key]);
+  	console.log(this.state.categoryList[key]);
   	this.setState({
 			categoryFocus: key,
 		});
   }
 
-  addTask(event) {
-		event.preventDefault();
-		if (this.TaskText.value !== '') {
-			this.state.taskId++;
-			let taskItemArray = this.state.taskItem;
-			taskItemArray.push({
-				taskText: this.TaskText.value,
-				key: this.state.taskId,
-				parentCategory: this.state.categoryFocus,
-			});
-
-			this.setState({
-				taskItem: taskItemArray,
-				taskInputValue: ''
-			});
-		}
-	}
-
 	handleCategoryInputChange(event) {
 		this.setState({categoryInputValue: event.target.value});
 	}
 
-	handleTaskInputChange(event) {
-		this.setState({taskInputValue: event.target.value});
-	}
-
-	editTask(key, newTask) {
-  	if (newTask !== '' && newTask) {
-	  	let editTaskItem = this.state.taskItem.map(function (item) {
-		  	if (item.key === key) {
-		  			item.taskText = newTask;
-		  	}
-		  	return item
-	  	});
-
-	  	this.setState({
-	  		taskItem: editTaskItem
-	  	});
-  	}
-  }
-
-  doneTask(key) {
-		let doneTaskItem = this.state.taskItem.map(function (item) {
-	  	if (item.key === key) {
-	  		item.done = !item.done;
-	  	}
-	  	return item
-  	});
-
-  	this.setState({
-  		taskItem: doneTaskItem
-  	});
-  }
-
   showSearchedTasks(items) {
   	this.setState({
-  		taskItem: items,
+  		taskList: items,
+  	});
+  }
+
+  showEditTaskList(editedTaskList) {
+  	this.setState({
+  		taskList: editedTaskList,
+  	});
+  }
+
+  showCompletedTaskList(completedTaskList) {
+  	this.setState({
+  		taskList: completedTaskList,
+  	});
+  }
+
+  showNewTask(newTaskList) {
+  	this.setState({
+  		taskList: newTaskList,
+  		taskInputValue: '',
+  	});
+  }
+
+  showNewTaskInput(changedTaskInput) {
+  	this.setState({
+  		taskInputValue: changedTaskInput,
   	});
   }
 
@@ -179,7 +153,7 @@ class App extends Component {
     return (
     	<main>
     		<Search 
-    			entries={this.state.taskItem}
+    			entries={this.state.taskList}
     			showSearchResult={this.showSearchedTasks}
     			categoryFocus={this.state.categoryFocus}
     		/>
@@ -197,35 +171,24 @@ class App extends Component {
 				    	<button type='submit'>Add</button>
 				    </form>
 	    		</article>
-	    		<article className="tasksInput">
-		    		<form onSubmit={this.addTask}> 
-				    	<input
-				    		id={this.state.categoryId}
-				     		type='text'
-				     		placeholder='Enter your task'
-				     		value={this.state.taskInputValue}
-				     		onChange={this.handleTaskInputChange}
-				     		ref={input => this.TaskText = input}
-				      />
-				    	<button type='submit'>Add</button>
-				    </form>
+	    		<article className="taskField">
+	    			<TaskField
+	    				entries={this.state}
+	    				editTaskList={this.showEditTaskList}
+	    				doneTaskList={this.showCompletedTaskList}
+	    				addNewTask={this.showNewTask}
+	    				updateTaskInput={this.showNewTaskInput}
+	    			/>
 	    		</article>
 	    	</section>
 		    <section className="renderingTree">
 		    	<article className="categoryTree">
 		    		<CategoryTree 
-			    		entries={this.state.categoryItem} 
+			    		entries={this.state.categoryList} 
 			    		deleted={this.deleteCategory}
 			    		rename={this.renameCategory}
 			    		addChild={this.addChildCategory}
 			    		showTasks={this.showCategoryTasks}
-			    	/>
-		    	</article>
-		    	<article className="taskTree">
-		    		<TaskTree 
-			    		entries={this.state} 
-			    		done={this.doneTask}
-			    		edit={this.editTask}
 			    	/>
 		    	</article>
 		    </section>

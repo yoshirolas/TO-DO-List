@@ -4,6 +4,7 @@ import './TaskTree.css';
 class TaskTree extends Component {
 	constructor(props) {
 		super(props);
+
 		this.createTask = this.createTask.bind(this);
 		this.editTask = this.editTask.bind(this);
 		this.doneTask = this.doneTask.bind(this);
@@ -37,13 +38,13 @@ class TaskTree extends Component {
 	
   render() {
   	const categoryFocus = this.props.entries.categoryFocus;
-  	const taskList = this.props.entries.taskItem;
-  	const taskFilter = taskList.filter(item => item.parentCategory === categoryFocus);
-  	let listTask = taskFilter.map(this.createTask);
+  	const enteredTaskList = this.props.entries.taskList;
+  	const filtereTaskdList = enteredTaskList.filter(item => item.parentCategory === categoryFocus);
+  	const taskList = filtereTaskdList.map(this.createTask);
 
     return (
 			<ul className="listTask">
-				{listTask}
+				{taskList}
 			</ul>
     );
   }

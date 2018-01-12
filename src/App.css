@@ -13,23 +13,12 @@ main {
 	height: 100%;
 }
 
-.tasksInput {
-	width: 50%;
-	height: 100%;
-}
-
-.renderingTree {
-	width: 100%;
-	height: 100%;
-	display: flex;
-}
-
 .categoryTree {
 	width: 50%;
 	height: 100%;
 }
 
-.taskTree {
+.taskField {
 	width: 50%;
 	height: 100%;
 }
