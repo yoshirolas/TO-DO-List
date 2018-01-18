@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import './CategoryInputForm.css';
 import { connect } from 'react-redux'
 import { addCategory } from './actions'
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class CategoryInputForm extends Component {
@@ -14,11 +15,13 @@ class CategoryInputForm extends Component {
 
 	addCategory = (event) => {
 		event.preventDefault();
-		this.props.dispatch(addCategory(this.CategoryTitle.value));
-		console.log(this.CategoryTitle.value);
-		this.setState({
-			categoryInputValue: '',
-		});
+		if (this.CategoryTitle.value) {
+			this.props.dispatch(addCategory(this.CategoryTitle.value));
+			
+			this.setState({
+				categoryInputValue: '',
+			});
+		}
 	}
 
 	handleCategoryInputChange = (event) => {
@@ -28,6 +31,11 @@ class CategoryInputForm extends Component {
 	}
 
   render() {
+  	const style = {
+  		margin: 5,
+  		height: 20,
+		};
+
     return (
 			<article className="categoryInput">
     		<form onSubmit={this.addCategory}> 
@@ -38,7 +46,7 @@ class CategoryInputForm extends Component {
 			     	onChange={ this.handleCategoryInputChange }
 			     	ref={ input => this.CategoryTitle = input }
 		      />
-		    	<button type='submit'>Add</button>
+		      <RaisedButton label="Add" type='submit' style={style} />
 		    </form>
   		</article>
     );
