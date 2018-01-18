@@ -1,33 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
-import { connect } from 'react-redux'
+// import './App.css';
+import Main from './Main';
 
 class App extends Component {
-
-	createCategory(item) {
-		return (
-			<li className>
-				{item.categoryText}
-			</li>  	
-    );
-	}
 	
   render() {
-  	let listCategory = this.props.categoryList.map(this.createCategory);
-  	console.log(this.props.categoryList)
     return (
-			<ul className="listCategory">
-				{listCategory}
-			</ul>  	
+    	<Main />
     );
   }
 }
 
-function mapStateToProps(state) {
-	return {
-		categoryList: state
-	}
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
 
