@@ -3,20 +3,31 @@ import './App.css';
 import { connect } from 'react-redux'
 
 class App extends Component {
+
+	createCategory(item) {
+		return (
+			<li className>
+				{item.categoryText}
+			</li>  	
+    );
+	}
 	
   render() {
+  	let listCategory = this.props.categoryList.map(this.createCategory);
   	console.log(this.props.categoryList)
     return (
-    	<div>
-    		hello> world
-    	</div>    	
+			<ul className="listCategory">
+				{listCategory}
+			</ul>  	
     );
   }
 }
 
-export default connect(state => {
+function mapStateToProps(state) {
 	return {
-		state: state
+		categoryList: state
 	}
-})(App);
+}
+
+export default connect(mapStateToProps)(App);
 
