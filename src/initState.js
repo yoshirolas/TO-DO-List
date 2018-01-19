@@ -1,4 +1,5 @@
 const initialState = {
+	test: 1,
 	categoryList: [
 		{
 			categoryName: 'Category 1', 

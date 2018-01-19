@@ -1,23 +1,11 @@
-// import { combineReducers } from 'redux';
-import initialState from '../initState';
+import { combineReducers } from 'redux';
+import addCategoryReducer from './addCategoryReducer';
+import delCategoryReducer from './delCategoryReducer';
 
 
-let uniqueCategoryId = 2;  
-
-function appReducer (state = initialState.categoryList, action) {
-	console.log(action)
-	switch (action.type) {
-		case 'ADD_CATEGORY': 
-			uniqueCategoryId++;
-			return state.concat({
-				categoryName: action.title,
-				categoryId: uniqueCategoryId,
-				child: null,
-				clicked: false,
-			});
-		default:
-			return state;
-	}
-}
+const appReducer = combineReducers ({
+	addCategoryReducer,
+	delCategoryReducer
+});
 
 export default appReducer;
