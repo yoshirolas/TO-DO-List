@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 // import './CategoryTree.css';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 // import { delCategory } from './actions'
+import RenameCategoryButton from './RenameCategoryButton';
+import DeleteCategoryButton from './DeleteCategoryButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
 class CategoryTree extends Component {
-
 
 	createCategory(item) {
 		const style = {
@@ -18,17 +19,15 @@ class CategoryTree extends Component {
 		return (
 			<li className="categoryItem" key={ item.categoryId }>
 				{ item.categoryName }
-				<RaisedButton label="V" type='submit' style={style} />
-				<RaisedButton label="X" type='submit' style={style} />
-				<RaisedButton label="+" type='submit' style={style} />
+				<RenameCategoryButton id={ item.categoryId } />
+				<DeleteCategoryButton id={ item.categoryId } />
+				<RaisedButton label="+" type='submit' style={ style } />
 			</li>  	
     );
 	}
 	
   render() {
-  	console.log(this.props)
-  	debugger;
-  	let categoryList = this.props.map(this.createCategory);
+  	let categoryList = this.props.categoryList.map(this.createCategory);
     return (
   		<ul className="categoryList">
 				{ categoryList }
@@ -39,7 +38,7 @@ class CategoryTree extends Component {
 
 function mapStateToProps(state) {
 	return {
-		categoryList: state
+		categoryList: state.changeCategoryTree
 	}
 }
 

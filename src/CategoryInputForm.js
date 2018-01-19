@@ -16,7 +16,7 @@ class CategoryInputForm extends Component {
 	addCategory = (event) => {
 		event.preventDefault();
 		if (this.CategoryTitle.value) {
-			this.props.dispatch(addCategory(this.CategoryTitle.value));
+		  this.props.dispatch(addCategory(this.CategoryTitle.value));
 			
 			this.setState({
 				categoryInputValue: '',

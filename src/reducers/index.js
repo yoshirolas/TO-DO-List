@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import addCategoryReducer from './addCategoryReducer';
-import delCategoryReducer from './delCategoryReducer';
+import changeCategoryTree from './changeCategoryTree';
+import delCategory from './delCategoryReducer';
 
 
 const appReducer = combineReducers ({
-	addCategoryReducer,
-	delCategoryReducer
+	changeCategoryTree,
+	delCategory,
 });
 
 export default appReducer;

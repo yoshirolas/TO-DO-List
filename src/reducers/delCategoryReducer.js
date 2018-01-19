@@ -2,14 +2,14 @@
 // import initialState from '../initState';
 
 
-// function delCategoryReducer (state = initialState.test, action) {
-// 	console.log(action)
+// function delCategory (state = 0, action) {
+// 	console.log(action.id)
 // 	switch (action.type) {
 // 		case 'DEL_CATEGORY': 
-// 			return state
+// 			return state.filter(item => item.categoryId !== action.id)
 // 		default:
 // 			return state;
 // 	}
 // }
 
-// export default delCategoryReducer;
+// export default delCategory;
