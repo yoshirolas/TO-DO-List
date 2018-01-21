@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
 // import './CategoryTree.css';
 import { connect } from 'react-redux';
-// import { delCategory } from './actions'
 import RenameCategoryButton from './RenameCategoryButton';
 import DeleteCategoryButton from './DeleteCategoryButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import AddChildrenCategoryButton from './AddChildrenCategoryButton';
+import { clickCategory, showTaskList } from './actions/appActions';
 
 
 class CategoryTree extends Component {
 
-	createCategory(item) {
-		const style = {
-  		margin: 5,
-  		height: 20,
-  		minWidth: 40,
-		};
+  categoryCliked = (item) => (event)=> {
+    console.log("CATEGORY_ITEM_KLICKED");
+    console.log(item.categoryId);
+    this.props.dispatch(clickCategory(item.categoryId));
+    this.props.dispatch(showTaskList());
+  }
 
+	createCategory = (item) => {
 		return (
-			<li className="categoryItem" key={ item.categoryId }>
+			<li 
+        className={ item.child ? "categoryChildItem" : "categoryParentItem"}
+        key={ item.categoryId } 
+        onClick={ this.categoryCliked(item) }
+      >
 				{ item.categoryName }
 				<RenameCategoryButton id={ item.categoryId } />
 				<DeleteCategoryButton id={ item.categoryId } />
-				<RaisedButton label="+" type='submit' style={ style } />
+				{ item.child 
+          ? <div></div>
+          : <AddChildrenCategoryButton id={ item.categoryId } /> 
+        }
 			</li>  	
     );
 	}

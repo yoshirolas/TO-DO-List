@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import './CategoryInputForm.css';
 import { connect } from 'react-redux'
-import { addCategory } from './actions'
+import { addCategory } from './actions/appActions';
 import RaisedButton from 'material-ui/RaisedButton';
 
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { delCategory } from './actions';
+import { delCategory } from './actions/appActions';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
 class DeleteCategoryButton extends Component {
 
 	deleteCategory = (event) => {
+    event.stopPropagation();
 		this.props.dispatch(delCategory(this.props.id));
 	}
 

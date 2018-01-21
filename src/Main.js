@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import './Main.css';
+import './Main.css';
 import CategoryField from './CategoryField';
-// import TaskField from './TaskField';
+import TaskField from './TaskField';
 
 
 class Main extends Component {
@@ -9,7 +9,8 @@ class Main extends Component {
   render() {
     return (
     	<main>
-    		<CategoryField />	
+    		<CategoryField className="categoryField" />	
+        <TaskField className="taskField" />
     	</main>
     );
   }

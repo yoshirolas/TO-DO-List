@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { renameCategory } from './actions'
+import { renameCategory } from './actions/appActions';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
 class RenameCategoryButton extends Component {
 
 	renameCategory = (event) => {
+    event.stopPropagation();
 		const categoryItem = this.props.categoryList.filter(
 			item => item.categoryId === this.props.id
 		);
