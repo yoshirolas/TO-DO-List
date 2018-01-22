@@ -13,30 +13,56 @@ function changeCategoryTree (state = initialState.categoryList, action) {
 			return state.concat({
 				categoryName: action.title,
 				categoryId: uniqueCategoryId,
-				child: false,
+				parentCategoryId: null,
+				child: [],
 				clicked: false,
 				taskList: [],
 			});
 		}
 
 		case 'ADD_CHILDREN_CATEGORY': {
+			console.log(action.id)
 			uniqueCategoryId++;
+			uniqueTaskId++;
 			let stateCopy = state.concat();
-			let parentCategoryPosition = stateCopy.findIndex(item => item.categoryId === action.id);
-			console.log(parentCategoryPosition)
-			let childrenCategoryItem = {
-				categoryName: action.title,
+			let categoryItem = stateCopy.find(item => item.categoryId === action.id);
+			// let parentCategoryPosition = stateCopy.findIndex(item => item.categoryId === action.id);
+			// console.log(categoryItem)
+			categoryItem.child.push({
+				categoryName: action.title, 
 				categoryId: uniqueCategoryId,
-				child: true,
+				parentCategoryId: action.id, 
+				child: [],
 				clicked: false,
 				taskList: [],
-			};
-			stateCopy.splice(parentCategoryPosition + 1, 0, childrenCategoryItem);
+			});
+			// console.log(categoryItem)
+			// let childrenCategoryItem = {
+			// 	categoryName: action.title,
+			// 	categoryId: uniqueCategoryId,
+			// 	child: true,
+			// 	clicked: false,
+			// 	taskList: [],
+			// };
+			// stateCopy.splice(parentCategoryPosition + 1, 0, childrenCategoryItem);
 			return stateCopy;
 		}
 
 		case 'DEL_CATEGORY': {
-			return state.filter(item => item.categoryId !== action.id);
+				console.log('id ' + action.id + 'parent ' + action.parentId)
+			if (action.parentId > 0) {
+				let stateCopy = state.concat();
+				console.log(stateCopy)
+				let parentCategoryItem = stateCopy.find(item => item.categoryId = action.parentId);
+				console.log(parentCategoryItem)
+				let childCategoryItem = parentCategoryItem.child.filter(item => item.categoryId !== action.id)
+				parentCategoryItem.child = childCategoryItem;
+
+				return stateCopy
+			} else {
+
+				return state.filter(item => item.categoryId !== action.id)
+			}
 		}
 
 		case 'RENAME_CATEGORY': {

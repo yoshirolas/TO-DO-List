@@ -12,24 +12,47 @@ class CategoryTree extends Component {
   categoryCliked = (item) => (event)=> {
     console.log("CATEGORY_ITEM_KLICKED");
     console.log(item.categoryId);
+    console.log(item.parentCategoryId);
     this.props.dispatch(clickCategory(item.categoryId));
     this.props.dispatch(showTaskList());
   }
 
+  createChildCategory = (item) => {
+  	return (
+  		<ul 
+  			className={"categoryChildItem"}
+	    	key={ item.categoryId } 
+	    	onClick={ this.categoryCliked(item) }
+	    >
+				<li>
+					{ item.categoryName }
+					<RenameCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
+					<DeleteCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
+				</li>  
+			</ul>	
+    );
+  }
+
 	createCategory = (item) => {
+		let test;
+		if (item.child.length > 0) {
+			test = item.child.map(this.createChildCategory)
+		}
+
 		return (
 			<li 
-        className={ item.child ? "categoryChildItem" : "categoryParentItem"}
+        className={"categoryParentItem"}
         key={ item.categoryId } 
         onClick={ this.categoryCliked(item) }
       >
 				{ item.categoryName }
-				<RenameCategoryButton id={ item.categoryId } />
-				<DeleteCategoryButton id={ item.categoryId } />
-				{ item.child 
+				<RenameCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
+				<DeleteCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
+				{ !item.child 
           ? <div></div>
-          : <AddChildrenCategoryButton id={ item.categoryId } /> 
+          : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
         }
+        {test}
 			</li>  	
     );
 	}

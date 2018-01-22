@@ -9,7 +9,8 @@ class AddChildrenCategoryButton extends Component {
   addChildrenCategory = (event) => {
     event.stopPropagation();
     const childrenCategoryName = prompt('Enter new category title');
-    this.props.dispatch(addChildrenCategory(this.props.id, childrenCategoryName));
+    console.log(this.props.categoryId)
+    this.props.dispatch(addChildrenCategory(this.props.categoryId, childrenCategoryName));
   }
 
   render() {

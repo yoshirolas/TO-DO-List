@@ -9,9 +9,10 @@ export const addChildrenCategory = (id, title) => ({
   title,
 });
 
-export const delCategory = (id) => ({
+export const delCategory = (id, parentId) => ({
 	type: 'DEL_CATEGORY',
 	id,
+  parentId,
 });
 
 export const renameCategory = (id, title) => ({

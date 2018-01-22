@@ -8,7 +8,8 @@ class DeleteCategoryButton extends Component {
 
 	deleteCategory = (event) => {
     event.stopPropagation();
-		this.props.dispatch(delCategory(this.props.id));
+    console.log(' ' + this.props.categoryId + ' ' + this.props.parentCategoryId)
+		this.props.dispatch(delCategory(this.props.categoryId, this.props.parentCategoryId));
 	}
 
   render() {
