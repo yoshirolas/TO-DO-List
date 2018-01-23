@@ -4,6 +4,7 @@ const categoryDefaultItem = {
 	parentCategoryId: null, 
 	child: [],
 	clicked: false,
+	searchQuery: '',
 	taskList: [
 		{
 			taskName: 'Task 1',

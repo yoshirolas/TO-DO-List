@@ -16,97 +16,132 @@ function changeCategoryTree (state = initialState.categoryList, action) {
 				parentCategoryId: null,
 				child: [],
 				clicked: false,
+				searchQuery: '',
 				taskList: [],
 			});
 		}
 
 		case 'ADD_CHILDREN_CATEGORY': {
-			console.log(action.id)
 			uniqueCategoryId++;
 			uniqueTaskId++;
-			let stateCopy = state.concat();
+			let stateCopy = [...state];
 			let categoryItem = stateCopy.find(item => item.categoryId === action.id);
-			// let parentCategoryPosition = stateCopy.findIndex(item => item.categoryId === action.id);
-			// console.log(categoryItem)
 			categoryItem.child.push({
 				categoryName: action.title, 
 				categoryId: uniqueCategoryId,
 				parentCategoryId: action.id, 
 				child: [],
-				clicked: false,
+				clicked: true,
+				searchQuery: '',
 				taskList: [],
 			});
-			// console.log(categoryItem)
-			// let childrenCategoryItem = {
-			// 	categoryName: action.title,
-			// 	categoryId: uniqueCategoryId,
-			// 	child: true,
-			// 	clicked: false,
-			// 	taskList: [],
-			// };
-			// stateCopy.splice(parentCategoryPosition + 1, 0, childrenCategoryItem);
+
 			return stateCopy;
 		}
 
 		case 'DEL_CATEGORY': {
-				console.log('id ' + action.id + 'parent ' + action.parentId)
-			if (action.parentId > 0) {
-				let stateCopy = state.concat();
-				console.log(stateCopy)
-				let parentCategoryItem = stateCopy.find(item => item.categoryId = action.parentId);
-				console.log(parentCategoryItem)
-				let childCategoryItem = parentCategoryItem.child.filter(item => item.categoryId !== action.id)
+			let stateCopy = [...state];
+			if (action.parentId) {
+				let parentCategoryItem = stateCopy.find(
+					item => item.categoryId === action.parentId
+				);
+				let childCategoryItem = parentCategoryItem.child.filter(
+					item => item.categoryId !== action.id
+				);
 				parentCategoryItem.child = childCategoryItem;
-
-				return stateCopy
 			} else {
-
-				return state.filter(item => item.categoryId !== action.id)
+				stateCopy = stateCopy.filter(item => item.categoryId !== action.id)
 			}
+
+			return stateCopy
 		}
 
 		case 'RENAME_CATEGORY': {
-			let stateCopy = state.concat();
-			let categoryItem = stateCopy.find(item => item.categoryId === action.id);
-			categoryItem.categoryName = action.title;
-			let categoryItemPosition = stateCopy.findIndex(item => item.categoryId === action.id);
-			stateCopy.splice(categoryItemPosition, 1, categoryItem);
+			let stateCopy = [...state];
+			if (action.parentId) {
+				let parentCategoryItem = stateCopy.find(
+					item => item.categoryId === action.parentId
+				);
+				let childCategoryItem = parentCategoryItem.child.find(
+					item => item.categoryId === action.id
+				);
+				childCategoryItem.categoryName = action.title;
+			} else {
+				let categoryItem = stateCopy.find(item => item.categoryId === action.id);
+				categoryItem.categoryName = action.title;
+			}
+
 			return stateCopy;
 		}
 
 		case 'CLICK_CATEGORY': {
-			state.map(item => item.clicked = false);
-			let categoryItem = state.find(item => item.categoryId === action.idx);
-			categoryItem.clicked = !categoryItem.clicked;
-			return state; 
+			let stateCopy = [...state];
+			stateCopy.map(item => {
+				item.clicked = false;
+				if (item.child) {
+					item.child.map(childItem => childItem.clicked = false)
+				}
+			});
+			if (action.parentId) {
+				let parentCategoryItem = stateCopy.find(
+					item => item.categoryId === action.parentId
+				);
+				let childCategoryItem = parentCategoryItem.child.find(
+					item => item.categoryId === action.id
+				);
+				childCategoryItem.clicked = !childCategoryItem.clicked;
+			} else {
+				let categoryItem = stateCopy.find(item => item.categoryId === action.id);
+				categoryItem.clicked = !categoryItem.clicked;
+			}
+			return stateCopy; 
 		}
 
 		case 'ADD_TASK': {
-			let stateCopy = state.concat();
-			if (!stateCopy.find(item => item.clicked === true)) {
+			let stateCopy = [...state];
+			if (!stateCopy.find(item => item.clicked) && 
+				!stateCopy.find(item => item.child.length > 0)) {
 				return stateCopy;
 			}
 			uniqueTaskId++;
-			let categoryItem = stateCopy.find(item => item.clicked === true);
-			categoryItem.taskList.push( {
-				taskName: action.title,
-				taskId: uniqueTaskId,
-				description: '',
-				done: false,
-			});
-			return stateCopy; 
-		}
-
-		case 'SHOW_TASKLIST': {
-			let stateCopy = state.concat();
-			return stateCopy; 
+			if (!stateCopy.find(item => item.clicked)) {
+				const parents = stateCopy.filter(item => (item.child.length > 0));
+				const children = parents.find(item => item.child.find(it => it.clicked))
+				const clickedCategory = children.child.find(item => item.clicked);
+				clickedCategory.taskList.push({
+					taskName: action.title,
+					taskId: uniqueTaskId,
+					description: '',
+					done: false,
+				});
+			} else {
+				let categoryItem = stateCopy.find(item => item.clicked === true);
+				categoryItem.taskList.push({
+					taskName: action.title,
+					taskId: uniqueTaskId,
+					description: '',
+					done: false,
+				});
+			}
+			return stateCopy;
 		}
 		
 		case 'DONE_TASK': {
-			let stateCopy = state.concat();
-			let categoryItem = stateCopy.find(item => item.clicked === true);
-			let taskItem = categoryItem.taskList.find(item => item.taskId === action.id);
-			taskItem.done = !taskItem.done;
+			let stateCopy = [...state];
+			let taskItem;
+			if (!stateCopy.find(item => item.clicked)) {
+				const parents = stateCopy.filter(item => (item.child.length > 0));
+				const children = parents.find(item => item.child.find(it => it.clicked))
+				const clickedCategory = children.child.find(item => item.clicked);
+				taskItem = clickedCategory.taskList.find(item => item.taskId === action.id);
+				taskItem.done = !taskItem.done;
+			} else {
+				const categoryItem = stateCopy.find(item => item.clicked);
+				taskItem = categoryItem.taskList.find(item => item.taskId === action.id);
+				taskItem.done = !taskItem.done;
+			}
+
+			return stateCopy;
 		}
 
 		default:

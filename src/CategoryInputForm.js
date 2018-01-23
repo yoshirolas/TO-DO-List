@@ -53,10 +53,4 @@ class CategoryInputForm extends Component {
   }
 }
 
-function mapStateToProps(state) {
-	return {
-		categoryList: state
-	}
-}
-
-export default connect(mapStateToProps)(CategoryInputForm);
+export default connect()(CategoryInputForm);

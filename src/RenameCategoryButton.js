@@ -8,13 +8,33 @@ class RenameCategoryButton extends Component {
 
 	renameCategory = (event) => {
     event.stopPropagation();
-		const categoryItem = this.props.categoryList.filter(
-			item => item.categoryId === this.props.categoryId
-		);
-		console.log(this.props)
-		const oldCategoryName = categoryItem[0].categoryName;
+
+    let parentCategoryItem;
+    let childCategoryItem;
+    let oldCategoryName;
+
+    if (this.props.parentCategoryId) {
+      parentCategoryItem = this.props.categoryList.find(
+        item => item.categoryId === this.props.parentCategoryId
+      );
+      childCategoryItem = parentCategoryItem.child.find(
+        item => item.categoryId === this.props.categoryId
+      );
+      oldCategoryName = childCategoryItem.categoryName;
+    } else {
+      childCategoryItem = this.props.categoryList.filter(
+        item => item.categoryId === this.props.categoryId
+      );
+      oldCategoryName = childCategoryItem[0].categoryName;
+    }
+
 		const newCategoryName = prompt('Enter new category title', oldCategoryName);
-		this.props.dispatch(renameCategory(this.props.categoryId, newCategoryName));
+		
+    this.props.dispatch(renameCategory(
+      this.props.categoryId, 
+      this.props.parentCategoryId,
+      newCategoryName,
+    ));
 	}
 
   render() {

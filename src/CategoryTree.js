@@ -4,17 +4,17 @@ import { connect } from 'react-redux';
 import RenameCategoryButton from './RenameCategoryButton';
 import DeleteCategoryButton from './DeleteCategoryButton';
 import AddChildrenCategoryButton from './AddChildrenCategoryButton';
-import { clickCategory, showTaskList } from './actions/appActions';
+import { clickCategory } from './actions/appActions';
 
 
 class CategoryTree extends Component {
 
   categoryCliked = (item) => (event)=> {
     console.log("CATEGORY_ITEM_KLICKED");
+    console.log(event.target);
     console.log(item.categoryId);
     console.log(item.parentCategoryId);
-    this.props.dispatch(clickCategory(item.categoryId));
-    this.props.dispatch(showTaskList());
+    this.props.dispatch(clickCategory(item.categoryId, item.parentCategoryId));
   }
 
   createChildCategory = (item) => {
@@ -26,34 +26,48 @@ class CategoryTree extends Component {
 	    >
 				<li>
 					{ item.categoryName }
-					<RenameCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
-					<DeleteCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
+					<RenameCategoryButton 
+            categoryId={ item.categoryId } 
+            parentCategoryId={ item.parentCategoryId } 
+          />
+					<DeleteCategoryButton 
+            categoryId={ item.categoryId } 
+            parentCategoryId={ item.parentCategoryId } 
+          />
 				</li>  
 			</ul>	
     );
   }
 
 	createCategory = (item) => {
-		let test;
+		let childCategoryList;
 		if (item.child.length > 0) {
-			test = item.child.map(this.createChildCategory)
+			childCategoryList = item.child.map(this.createChildCategory)
 		}
 
 		return (
-			<li 
-        className={"categoryParentItem"}
-        key={ item.categoryId } 
-        onClick={ this.categoryCliked(item) }
-      >
-				{ item.categoryName }
-				<RenameCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
-				<DeleteCategoryButton categoryId={ item.categoryId } parentCategoryId={ item.parentCategoryId } />
-				{ !item.child 
-          ? <div></div>
-          : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
-        }
-        {test}
-			</li>  	
+      <ul key={item.categoryId}>
+  			<li 
+          className={"categoryParentItem"}
+          key={ item.categoryId } 
+          onClick={ this.categoryCliked(item) }
+        >
+  				{ item.categoryName }
+  				<RenameCategoryButton 
+            categoryId={ item.categoryId } 
+            parentCategoryId={ item.parentCategoryId } 
+          />
+  				<DeleteCategoryButton 
+            categoryId={ item.categoryId } 
+            parentCategoryId={ item.parentCategoryId } 
+          />
+  				{ !item.child 
+            ? <div></div>
+            : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
+          }
+  			</li> 
+        { childCategoryList }
+      </ul> 	
     );
 	}
 	

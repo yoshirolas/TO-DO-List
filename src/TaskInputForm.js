@@ -36,7 +36,9 @@ class TaskInputForm extends Component {
       height: 20,
     };
 
-    if (!this.props.categoryList.find(item => item.clicked === true)) {
+    if (!this.props.categoryList.find(item => item.clicked) &&
+      !this.props.categoryList.find(item => item.child)
+    ) {
       return (
         <article className="taskInput">
         </article>
@@ -62,7 +64,7 @@ class TaskInputForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    categoryList: state.changeCategoryTree
+    categoryList: state.changeCategoryTree,
   }
 }
 

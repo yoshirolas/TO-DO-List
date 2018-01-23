@@ -15,15 +15,17 @@ export const delCategory = (id, parentId) => ({
   parentId,
 });
 
-export const renameCategory = (id, title) => ({
+export const renameCategory = (id, parentId, title) => ({
 	type: 'RENAME_CATEGORY',
 	id,
+  parentId,
 	title,
 });
 
-export const clickCategory = (idx) => ({
+export const clickCategory = (id, parentId) => ({
   type: 'CLICK_CATEGORY',
-  idx,
+  id,
+  parentId,
 });
 
 export const addTask = (title) => ({
@@ -31,12 +33,22 @@ export const addTask = (title) => ({
   title,
 });
 
-export const showTaskList = () => ({
-  type: 'SHOW_TASKLIST',
-});
-
 export const doneTask = (id) => ({
   type: 'DONE_TASK',
   id
 });
+
+export const filterTaskBySearchQuery = (query) => ({
+  type: 'FILTER_TASK_BY_SEARCH_QUERY',
+  query
+});
+
+export const filterTaskByDone = () => ({
+  type: 'FILTER_TASK_BY_DONE',
+});
+
+export const clearSearchQuery = () => ({
+  type: 'CLEAR_SEARCH_QUERY',
+});
+
 

@@ -8,7 +8,6 @@ class DeleteCategoryButton extends Component {
 
 	deleteCategory = (event) => {
     event.stopPropagation();
-    console.log(' ' + this.props.categoryId + ' ' + this.props.parentCategoryId)
 		this.props.dispatch(delCategory(this.props.categoryId, this.props.parentCategoryId));
 	}
 
@@ -23,7 +22,7 @@ class DeleteCategoryButton extends Component {
 			<RaisedButton 
 				label="X" 
 				type='submit' 
-				style={style} 
+				style={ style } 
 				onClick={ this.deleteCategory }
 			/>
     );

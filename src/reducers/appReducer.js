@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import changeCategoryTree from './changeCategoryTreeReducer';
-import changeTaskTreeReducer from './changeTaskTreeReducer';
+import changeSearchQuery from './changeSearchQueryReducer';
 
 
 const appReducer = combineReducers ({
 	changeCategoryTree,
-	changeTaskTreeReducer,
+	changeSearchQuery,
 });
 
 export default appReducer;
