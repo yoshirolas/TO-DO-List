@@ -22,7 +22,7 @@ class AddChildrenCategoryButton extends Component {
 
     return (
       <RaisedButton 
-        label="+" 
+        label={ <i className="material-icons">note_add</i> } 
         type='submit' 
         style={style} 
         onClick={ this.addChildrenCategory }

@@ -1,0 +1,36 @@
+.taskItem {
+	width: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	padding: 5px;
+	text-overflow: ellipsis;
+	display: flex;
+	justify-content: space-between;
+
+}
+
+.checkedInput {
+	display: block;
+
+	margin: 4px;
+}
+
+.uncheckedInput {
+	display: block;
+
+	margin: 4px;
+}
+
+.taskTitle {
+	display: block;
+	width: 170px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.editBtn {
+	display: block;
+	margin-right: 0px;
+  margin-left: 0px;
+
+}

@@ -8,10 +8,10 @@ class Header extends Component {
 
   render() {
     return (
-      <div>
+      <header>
         <SearchBar className="searchBar" /> 
         <ProgressBar className="progressBar"/>
-      </div>
+      </header>
     );
   }
 }

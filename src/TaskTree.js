@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './CategoryTree.css';
+import './TaskTree.css';
 import { connect } from 'react-redux';
 import { doneTask } from './actions/appActions';
 
@@ -14,13 +14,15 @@ class TaskTree extends Component {
     if (item.done) {
       return (
         <li className="taskItem" key={ item.taskId } >
-        { item.taskName }
           <input
             className="checkedInput" 
             type="checkbox"
             checked
             onChange={ this.doneTask(item) }
           />
+          <h4 className="taskTitle"> 
+            { item.taskName }
+          </h4>
           <button className="editBtn">
             V
           </button>
@@ -30,12 +32,14 @@ class TaskTree extends Component {
 
     return (
       <li className="taskItem" key={ item.taskId } >
-      { item.taskName }
         <input 
           className="uncheckedInput" 
           type="checkbox"
           onChange={ this.doneTask(item) }
         />
+        <h4 className="taskTitle"> 
+          { item.taskName }
+        </h4>
         <button className="editBtn">
           V
         </button>

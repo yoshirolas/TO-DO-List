@@ -40,13 +40,13 @@ class RenameCategoryButton extends Component {
   render() {
   	const style = {
   		margin: 5,
-  		height: 40,
+  		height: 30,
   		minWidth: 40,
 		};
 
     return (
 			<RaisedButton 
-				label="V" 
+				label={ <i className="material-icons">create</i> }
 				type='submit' 
 				style={style} 
 				onClick={this.renameCategory}

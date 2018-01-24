@@ -20,7 +20,7 @@ class DeleteCategoryButton extends Component {
 
     return (
 			<RaisedButton 
-				label="X" 
+				label={ <i className="material-icons">delete_forever</i> }
 				type='submit' 
 				style={ style } 
 				onClick={ this.deleteCategory }
