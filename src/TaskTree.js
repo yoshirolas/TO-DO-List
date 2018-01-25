@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './TaskTree.css';
 import { connect } from 'react-redux';
 import { doneTask } from './actions/appActions';
+import IconButton from 'material-ui/IconButton';
+import ActionDescription from 'material-ui/svg-icons/action/description';
 
 
 class TaskTree extends Component {
@@ -20,12 +22,12 @@ class TaskTree extends Component {
             checked
             onChange={ this.doneTask(item) }
           />
-          <h4 className="taskTitle"> 
+          <h3 className="taskTitle"> 
             { item.taskName }
-          </h4>
-          <button className="editBtn">
-            V
-          </button>
+          </h3>
+          <IconButton>
+            <ActionDescription />
+          </IconButton>
         </li>   
       );
     }
@@ -37,12 +39,12 @@ class TaskTree extends Component {
           type="checkbox"
           onChange={ this.doneTask(item) }
         />
-        <h4 className="taskTitle"> 
+        <h3 className="taskTitle"> 
           { item.taskName }
-        </h4>
-        <button className="editBtn">
-          V
-        </button>
+        </h3>
+        <IconButton>
+          <ActionDescription />
+        </IconButton>
       </li>   
     );
   }
@@ -54,10 +56,17 @@ class TaskTree extends Component {
       if (this.props.children.length > 0) {
         console.log(this.props.children)
         const children = this.props.children.find(item => item.child.find(it => it.clicked))
-        clickedCategory = children.child.find(item => item.clicked);
-        console.log(clickedCategory)
-        const taskList = clickedCategory.taskList.map(this.createTask);
-        console.log(taskList)
+        if (children) {
+          clickedCategory = children.child.find(item => item.clicked);
+          console.log(clickedCategory)
+          const taskList = clickedCategory.taskList.map(this.createTask);
+          console.log(taskList)
+        } else {
+          return ( 
+            <ul>
+            </ul> 
+          );
+        }
       } else {
         return ( 
           <ul>

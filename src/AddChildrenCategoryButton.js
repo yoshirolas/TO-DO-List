@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addChildrenCategory } from './actions/appActions';
-import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+import ContentAddBox from 'material-ui/svg-icons/content/add-box';
 
 
 class AddChildrenCategoryButton extends Component {
@@ -10,23 +11,18 @@ class AddChildrenCategoryButton extends Component {
     event.stopPropagation();
     const childrenCategoryName = prompt('Enter new category title');
     console.log(this.props.categoryId)
-    this.props.dispatch(addChildrenCategory(this.props.categoryId, childrenCategoryName));
+
+    if (childrenCategoryName !== '' && childrenCategoryName) {
+      this.props.dispatch(addChildrenCategory(this.props.categoryId, childrenCategoryName));
+    }
   }
 
   render() {
-    const style = {
-      margin: 5,
-      height: 30,
-      minWidth: 40,
-    };
 
     return (
-      <RaisedButton 
-        label={ <i className="material-icons">note_add</i> } 
-        type='submit' 
-        style={style} 
-        onClick={ this.addChildrenCategory }
-      />
+      <IconButton onClick={ this.addChildrenCategory }>
+        <ContentAddBox />
+      </IconButton>
     );
   }
 }

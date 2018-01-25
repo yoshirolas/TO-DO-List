@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './CategoryInputForm.css';
+import './CategoryInputForm.css';
 import { connect } from 'react-redux'
 import { addCategory } from './actions/appActions';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -33,7 +33,7 @@ class CategoryInputForm extends Component {
   render() {
   	const style = {
   		margin: 5,
-  		height: 20,
+  		height: 30,
 		};
 
     return (

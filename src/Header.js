@@ -9,7 +9,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <SearchBar className="searchBar" /> 
+        <SearchBar /> 
         <ProgressBar className="progressBar"/>
       </header>
     );

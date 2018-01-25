@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './CategoryTree.css';
+import './CategoryTree.css';
 import { connect } from 'react-redux';
 import RenameCategoryButton from './RenameCategoryButton';
 import DeleteCategoryButton from './DeleteCategoryButton';
@@ -19,13 +19,16 @@ class CategoryTree extends Component {
 
   createChildCategory = (item) => {
   	return (
-  		<ul 
-  			className={"categoryChildItem"}
-	    	key={ item.categoryId } 
-	    	onClick={ this.categoryCliked(item) }
+  		<ul key={ item.categoryId } 
 	    >
-				<li>
-					{ item.categoryName }
+				<li
+        className={ item.clicked ? "categoryChildClickedItem" : "categoryChildItem" }
+        key={ item.categoryId } 
+        onClick={ this.categoryCliked(item) }
+        >
+          <h3 className="categoryTitle">
+            { item.categoryName }
+          </h3>
 					<RenameCategoryButton 
             categoryId={ item.categoryId } 
             parentCategoryId={ item.parentCategoryId } 
@@ -48,11 +51,13 @@ class CategoryTree extends Component {
 		return (
       <ul key={item.categoryId}>
   			<li 
-          className={"categoryParentItem"}
+          className={ item.clicked ? "categoryParentClickedItem" : "categoryParentItem" }
           key={ item.categoryId } 
           onClick={ this.categoryCliked(item) }
         >
-  				{ item.categoryName }
+          <h3 className="categoryTitle">
+            { item.categoryName }
+          </h3>
   				<RenameCategoryButton 
             categoryId={ item.categoryId } 
             parentCategoryId={ item.parentCategoryId } 

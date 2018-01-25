@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
-/*import './Search.css';*/
+import './SearchBar.css';
 import { connect } from 'react-redux'
 import { filterTaskBySearchQuery, filterTaskByDone } from './actions/appActions';
 import { clearSearchQuery } from './actions/appActions';
 import RaisedButton from 'material-ui/RaisedButton';
+import Checkbox from 'material-ui/Checkbox';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      checked: false,
       searchInputValue: '',
     }
+  }
+
+  updateCheck = () => {
+    this.setState((oldState) => {
+      return {
+        checked: !oldState.checked,
+      };
+    });
+    this.filterDone();
   }
 
   handleSearchInputChange = (event) => {
@@ -35,17 +46,22 @@ class SearchBar extends Component {
   render() {
     const style = {
       margin: 5,
-      height: 20,
-      minWidth: 40,
+      height: 30,
     };
 
     return (
-      <article className="search">
+      <article className="searchBar">
+        <div className="searchCheckBox">
+          <Checkbox
+            checked={this.state.checked}
+            onCheck={ this.updateCheck }
+          />
+        </div>
+        <span>
+          Show done
+        </span>
         <input 
-          type="checkbox"
-          onChange={ this.filterDone }
-        />
-        <input
+          className="searchInput"
           type='text'
           placeholder='Enter search query'
           value={this.state.searchInputValue}
@@ -62,10 +78,4 @@ class SearchBar extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    categoryList: state
-  }
-}
-
-export default connect(mapStateToProps)(SearchBar);
+export default connect()(SearchBar);

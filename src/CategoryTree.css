@@ -1,0 +1,58 @@
+.categoryList {
+  width: 100%;
+  font-size: 18px;
+}
+
+.categoryParentItem {
+  height: 40px;
+  overflow: hidden;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  margin: 1px 20px;
+}
+
+.categoryParentClickedItem {
+  height: 40px;
+  overflow: hidden;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  margin: 1px 20px;
+  background: rgba(0, 188, 212, 0.7);
+}
+
+.categoryChildItem {
+  height: 40px;
+  overflow: hidden;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  margin: 1px 20px 1px 60px;
+}
+
+.categoryChildClickedItem {
+  height: 40px;
+  overflow: hidden;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  margin: 1px 20px 1px 60px;
+  background: rgba(0, 188, 212, 0.7);
+}
+
+.categoryTitle {
+  display: block;
+  width: 170px;
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}

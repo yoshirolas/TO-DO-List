@@ -1,0 +1,25 @@
+.taskInput {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.taskInput form {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.taskInput input {
+  height: 26px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.taskInput input:focus {
+  height: 26px;
+  font-size: 16px;
+  font-style: normal;
+  border: 2px solid rgb(0, 188, 212);
+}

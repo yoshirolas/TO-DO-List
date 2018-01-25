@@ -8,7 +8,7 @@ class CategoryField extends Component {
 	
   render() {
     return (
-    	<section>
+    	<section className="categoryField">
     		<CategoryInputForm />	
     		<CategoryTree />
     	</section>

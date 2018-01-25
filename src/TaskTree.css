@@ -1,23 +1,27 @@
+.taskList {
+	width: 100%;
+}
+
 .taskItem {
-	width: 200px;
+	height: 40px;
 	overflow: hidden;
 	white-space: nowrap;
 	padding: 5px;
 	text-overflow: ellipsis;
 	display: flex;
 	justify-content: space-between;
-
+	align-items: center;
+	border: 1px solid black;
+	margin: 1px 20px;
 }
 
 .checkedInput {
 	display: block;
-
 	margin: 4px;
 }
 
 .uncheckedInput {
 	display: block;
-
 	margin: 4px;
 }
 
@@ -25,6 +29,7 @@
 	display: block;
 	width: 170px;
 	overflow: hidden;
+	white-space:nowrap;
 	text-overflow: ellipsis;
 }
 

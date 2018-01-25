@@ -31,7 +31,7 @@ function changeCategoryTree (state = initialState.categoryList, action) {
 				categoryId: uniqueCategoryId,
 				parentCategoryId: action.id, 
 				child: [],
-				clicked: true,
+				clicked: false,
 				searchQuery: '',
 				taskList: [],
 			});
@@ -106,14 +106,16 @@ function changeCategoryTree (state = initialState.categoryList, action) {
 			uniqueTaskId++;
 			if (!stateCopy.find(item => item.clicked)) {
 				const parents = stateCopy.filter(item => (item.child.length > 0));
-				const children = parents.find(item => item.child.find(it => it.clicked))
-				const clickedCategory = children.child.find(item => item.clicked);
-				clickedCategory.taskList.push({
-					taskName: action.title,
-					taskId: uniqueTaskId,
-					description: '',
-					done: false,
-				});
+				const children = parents.find(item => item.child.find(it => it.clicked));
+				if (children) {
+					const clickedCategory = children.child.find(item => item.clicked);
+					clickedCategory.taskList.push({
+						taskName: action.title,
+						taskId: uniqueTaskId,
+						description: '',
+						done: false,
+					});
+				}
 			} else {
 				let categoryItem = stateCopy.find(item => item.clicked === true);
 				categoryItem.taskList.push({

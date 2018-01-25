@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { delCategory } from './actions/appActions';
-import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever';
 
 
 class DeleteCategoryButton extends Component {
@@ -12,19 +13,11 @@ class DeleteCategoryButton extends Component {
 	}
 
   render() {
-  	const style = {
-  		margin: 5,
-  		height: 30,
-  		minWidth: 40,
-		};
 
     return (
-			<RaisedButton 
-				label={ <i className="material-icons">delete_forever</i> }
-				type='submit' 
-				style={ style } 
-				onClick={ this.deleteCategory }
-			/>
+      <IconButton onClick={ this.deleteCategory }>
+        <ActionDeleteForever />
+      </IconButton>
     );
   }
 }

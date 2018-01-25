@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { renameCategory } from './actions/appActions';
-import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+import ImageEdit from 'material-ui/svg-icons/image/edit';
 
 
 class RenameCategoryButton extends Component {
@@ -30,27 +31,21 @@ class RenameCategoryButton extends Component {
 
 		const newCategoryName = prompt('Enter new category title', oldCategoryName);
 		
-    this.props.dispatch(renameCategory(
+    if (newCategoryName !== '' && newCategoryName) {
+      this.props.dispatch(renameCategory(
       this.props.categoryId, 
       this.props.parentCategoryId,
       newCategoryName,
     ));
+    }
 	}
 
   render() {
-  	const style = {
-  		margin: 5,
-  		height: 30,
-  		minWidth: 40,
-		};
 
     return (
-			<RaisedButton 
-				label={ <i className="material-icons">create</i> }
-				type='submit' 
-				style={style} 
-				onClick={this.renameCategory}
-			/>
+      <IconButton onClick={this.renameCategory}>
+        <ImageEdit />
+      </IconButton>
     );
   }
 }

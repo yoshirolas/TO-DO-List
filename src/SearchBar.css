@@ -1,0 +1,31 @@
+.searchBar {
+  height: 50px;
+  width: 60%;
+  margin-right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+.searchCheckBox {
+  margin: 0;
+}
+
+.searchBar span {
+  margin-left: 0;
+  font-size: 14px;
+}
+
+.searchInput {
+  height: 26px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.searchInput:focus {
+  height: 26px;
+  font-size: 16px;
+  font-style: normal;
+  border: 2px solid rgb(0, 188, 212);
+}

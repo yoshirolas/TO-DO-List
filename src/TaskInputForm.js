@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './CategoryInputForm.css';
+import './TaskInputForm.css';
 import { connect } from 'react-redux'
 import { addTask } from './actions/appActions';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -33,7 +33,7 @@ class TaskInputForm extends Component {
   render() {
     const style = {
       margin: 5,
-      height: 20,
+      height: 30,
     };
 
     if (!this.props.categoryList.find(item => item.clicked) &&

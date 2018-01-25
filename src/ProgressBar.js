@@ -1,37 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/LinearProgress';
 
-export default class LinearProgressExampleDeterminate extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      completed: 90,
-    };
-  }
-
-  componentDidMount() {
-    this.timer = setTimeout(() => this.progress(5), 1000);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
-
-  progress(completed) {
-    if (completed > 10) {
-      this.setState({completed: 100});
-    } else {
-      this.setState({completed});
-      const diff = Math.random() * 10;
-      this.timer = setTimeout(() => this.progress(completed + diff), 1000);
-    }
-  }
+class ProgressBar extends Component {
 
   render() {
+    let completedCategories = 0;
+    let totalCategories = 0;
+    this.props.categoryList.forEach(item => {
+      totalCategories ++;
+      if (item.taskList) {
+        let taskNotDone = item.taskList.find(item => !item.done)
+        if (!taskNotDone) {
+          completedCategories ++;
+        }
+      } else {
+        completedCategories ++;
+      }
+      item.child.forEach(child => {
+        totalCategories ++;
+        if (child.taskList) {
+          let taskNotDone = child.taskList.find(item => !item.done)
+          if (!taskNotDone) {
+            completedCategories ++;
+          }
+        } else {
+          completedCategories ++;
+        }
+      });
+    });
+
+    const style = {
+        height: 10,
+      }
+
     return (
-      <LinearProgress mode="determinate" value={this.state.completed} />
+
+      <LinearProgress 
+        mode="determinate" 
+        value={ completedCategories } 
+        max={ totalCategories }
+        style={ style }
+      />
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    categoryList: state.changeCategoryTree,
+  }
+}
+
+export default connect(mapStateToProps)(ProgressBar);

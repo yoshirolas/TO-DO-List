@@ -8,7 +8,7 @@ class TaskField extends Component {
   
   render() {
     return (
-      <section>
+      <section className="taskField" >
         <TaskInputForm /> 
         <TaskTree />
       </section>
