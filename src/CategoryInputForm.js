@@ -32,8 +32,9 @@ class CategoryInputForm extends Component {
 
   render() {
   	const style = {
-  		margin: 5,
+  		margin: 1,
   		height: 30,
+  		'min-width': 0,
 		};
 
     return (

@@ -1,18 +1,23 @@
 main {
   text-align: center;
-  width: 100%;
+  width: 90%;
   height: 100%;
   display: flex;
+  background: rgba(0, 188, 212, 0.1);
+}
+
+header {
+  width: 90%;
 }
 
 .categoryField {
   width: 50%;
-  height: 80vh;
-  overflow: overlay;
+  height: 100%;
+  overflow: hidden;
 }
 
 .taskField {
   width: 50%;
-  height: 80vh;
-  overflow: overlay;
+  height: 100%;
+  overflow: hidden;
 }

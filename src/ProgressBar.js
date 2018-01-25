@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './ProgressBar.css';
 import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/LinearProgress';
 
@@ -36,12 +37,14 @@ class ProgressBar extends Component {
 
     return (
 
+    <div className="progressBar">
       <LinearProgress 
         mode="determinate" 
         value={ completedCategories } 
         max={ totalCategories }
         style={ style }
       />
+    </div>
     );
   }
 }

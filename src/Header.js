@@ -10,7 +10,7 @@ class Header extends Component {
     return (
       <header>
         <SearchBar /> 
-        <ProgressBar className="progressBar"/>
+        <ProgressBar />
       </header>
     );
   }

@@ -32,8 +32,9 @@ class TaskInputForm extends Component {
 
   render() {
     const style = {
-      margin: 5,
+      margin: 1,
       height: 30,
+      'min-width': 0,
     };
 
     if (!this.props.categoryList.find(item => item.clicked) &&

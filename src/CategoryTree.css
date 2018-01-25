@@ -1,6 +1,8 @@
 .categoryList {
   width: 100%;
+  height: 80vh;
   font-size: 18px;
+  overflow: overlay;
 }
 
 .categoryParentItem {
@@ -11,7 +13,12 @@
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  margin: 1px 20px;
+  margin: 1px 5px 1px 5px;
+  background: white;
+}
+
+.categoryParentItem:hover {
+  cursor: pointer;
 }
 
 .categoryParentClickedItem {
@@ -22,8 +29,12 @@
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  margin: 1px 20px;
-  background: rgba(0, 188, 212, 0.7);
+  margin: 1px 5px 1px 5px;
+  background: rgb(0, 188, 212);
+}
+
+.categoryParentClickedItem:hover {
+  cursor: pointer;
 }
 
 .categoryChildItem {
@@ -34,8 +45,14 @@
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  margin: 1px 20px 1px 60px;
+  margin: 1px 5px 1px 35px;
+  background: white;
 }
+
+.categoryChildItem:hover {
+  cursor: pointer;
+}
+
 
 .categoryChildClickedItem {
   height: 40px;
@@ -45,8 +62,12 @@
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  margin: 1px 20px 1px 60px;
-  background: rgba(0, 188, 212, 0.7);
+  margin: 1px 5px 1px 35px;
+  background: rgb(0, 188, 212);
+}
+
+.categoryChildClickedItem:hover {
+  cursor: pointer;
 }
 
 .categoryTitle {
