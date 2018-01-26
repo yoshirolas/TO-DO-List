@@ -6,6 +6,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 class ProgressBar extends Component {
 
   render() {
+
     let completedCategories = 0;
     let totalCategories = 0;
     this.props.categoryList.forEach(item => {
@@ -18,6 +19,7 @@ class ProgressBar extends Component {
       } else {
         completedCategories ++;
       }
+
       item.child.forEach(child => {
         totalCategories ++;
         if (child.taskList) {
@@ -33,18 +35,17 @@ class ProgressBar extends Component {
 
     const style = {
         height: 10,
-      }
+    }
 
     return (
-
-    <div className="progressBar">
-      <LinearProgress 
-        mode="determinate" 
-        value={ completedCategories } 
-        max={ totalCategories }
-        style={ style }
-      />
-    </div>
+      <div className="progressBar">
+        <LinearProgress 
+          mode="determinate" 
+          value={ completedCategories } 
+          max={ totalCategories }
+          style={ style }
+        />
+      </div>
     );
   }
 }

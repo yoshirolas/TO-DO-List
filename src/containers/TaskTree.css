@@ -2,6 +2,7 @@
 	width: 100%;
 	height: 80vh;
 	overflow: overlay;
+	font-size: 18px;
 }
 
 .taskItem {
@@ -48,5 +49,64 @@
 	display: block;
 	margin-right: 0px;
   margin-left: 0px;
+}
 
+.taskNameInput {
+	display: block;
+	width: 95%;
+	height: 40px;
+	outline: none;
+	overflow: hidden;
+	font-size: 20px;
+	border: 1px solid black;
+}
+
+.taskNameInput:focus {
+	border: 1px solid rgb(255, 64, 129);
+}
+
+.taskDescription {
+	width: 95%;
+	background: rgb(0, 188, 212);
+	border: 1px solid black;
+	margin-top: 1px;
+	overflow: hidden;
+}
+
+.taskDescription form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.taskDescription form span {
+  height: 100%;
+  width: 95%;
+  font-size: 12px;
+  display: inline-block;
+  text-align: left;
+}
+
+.taskDescriptionInput {
+	display: block;
+	width: 95%;
+	height: 100px;
+	outline: none;
+	overflow: auto;
+	resize: none;
+	font-size: 20px;
+	border: 1px solid black;
+}
+
+.taskDescriptionInput:focus {
+	border: 1px solid rgb(255, 64, 129);
+}
+
+.taskDescriptionBtnContainer {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

@@ -4,24 +4,28 @@ import { connect } from 'react-redux';
 import RenameCategoryButton from './RenameCategoryButton';
 import DeleteCategoryButton from './DeleteCategoryButton';
 import AddChildrenCategoryButton from './AddChildrenCategoryButton';
-import { clickCategory } from '../actions/appActions';
+import { clickCategory, closeTaskSettings } from '../actions/appActions';
 
 
 class CategoryTree extends Component {
 
   categoryCliked = (item) => (event)=> {
-    console.log("CATEGORY_ITEM_KLICKED");
-    console.log(event.target);
-    console.log(item.categoryId);
-    console.log(item.parentCategoryId);
-    this.props.dispatch(clickCategory(item.categoryId, item.parentCategoryId));
+  
+    this.props.dispatch(closeTaskSettings());
+    this.props.dispatch(clickCategory(item.categoryId, 
+      item.parentCategoryId
+    ));
   }
 
   createChildCategory = (item) => {
+
   	return (
   		<ul key={ item.categoryId }>
 				<li
-          className={ item.clicked ? "categoryChildClickedItem" : "categoryChildItem" }
+          className={ item.clicked 
+            ? "categoryChildClickedItem" 
+            : "categoryChildItem" 
+          }
           key={ item.categoryId } 
           onClick={ this.categoryCliked(item) }
         >
@@ -42,6 +46,7 @@ class CategoryTree extends Component {
   }
 
 	createCategory = (item) => {
+
 		let childCategoryList;
 		if (item.child.length > 0) {
 			childCategoryList = item.child.map(this.createChildCategory)
@@ -50,7 +55,10 @@ class CategoryTree extends Component {
 		return (
       <ul key={item.categoryId}>
   			<li 
-          className={ item.clicked ? "categoryParentClickedItem" : "categoryParentItem" }
+          className={ item.clicked 
+            ? "categoryParentClickedItem" 
+            : "categoryParentItem" 
+          }
           key={ item.categoryId } 
           onClick={ this.categoryCliked(item) }
         >

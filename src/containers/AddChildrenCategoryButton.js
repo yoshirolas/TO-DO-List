@@ -8,12 +8,15 @@ import ContentAddBox from 'material-ui/svg-icons/content/add-box';
 class AddChildrenCategoryButton extends Component {
 
   addChildrenCategory = (event) => {
+    
     event.stopPropagation();
     const childrenCategoryName = prompt('Enter new category title');
-    console.log(this.props.categoryId)
 
     if (childrenCategoryName !== '' && childrenCategoryName) {
-      this.props.dispatch(addChildrenCategory(this.props.categoryId, childrenCategoryName));
+      this.props.dispatch(addChildrenCategory(
+        this.props.categoryId,
+        childrenCategoryName
+      ));
     }
   }
 

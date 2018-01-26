@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './Header.css';
+import './Header.css';
 import SearchBar from '../containers/SearchBar';
 import ProgressBar from '../containers/ProgressBar';
 

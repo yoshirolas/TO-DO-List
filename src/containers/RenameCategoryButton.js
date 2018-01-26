@@ -8,8 +8,8 @@ import ImageEdit from 'material-ui/svg-icons/image/edit';
 class RenameCategoryButton extends Component {
 
 	renameCategory = (event) => {
-    event.stopPropagation();
 
+    event.stopPropagation();
     let parentCategoryItem;
     let childCategoryItem;
     let oldCategoryName;
@@ -29,7 +29,9 @@ class RenameCategoryButton extends Component {
       oldCategoryName = childCategoryItem[0].categoryName;
     }
 
-		const newCategoryName = prompt('Enter new category title', oldCategoryName);
+		const newCategoryName = prompt(
+      'Enter new category title', oldCategoryName
+    );
 		
     if (newCategoryName !== '' && newCategoryName) {
       this.props.dispatch(renameCategory(

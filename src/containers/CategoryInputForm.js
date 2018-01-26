@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 class CategoryInputForm extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -25,6 +26,7 @@ class CategoryInputForm extends Component {
 	}
 
 	handleCategoryInputChange = (event) => {
+
 		this.setState({
 			categoryInputValue: event.target.value,
 		});
@@ -39,7 +41,7 @@ class CategoryInputForm extends Component {
 
     return (
 			<article className="categoryInput">
-    		<form onSubmit={this.addCategory}> 
+    		<form onSubmit={ this.addCategory }> 
 		    	<input
 			     	type='text'
 			     	placeholder='Enter category title'
@@ -47,7 +49,7 @@ class CategoryInputForm extends Component {
 			     	onChange={ this.handleCategoryInputChange }
 			     	ref={ input => this.CategoryTitle = input }
 		      />
-		      <RaisedButton label="Add" type='submit' style={style} />
+		      <RaisedButton label="Add" type='submit' style={ style } />
 		    </form>
   		</article>
     );

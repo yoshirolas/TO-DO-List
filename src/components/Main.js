@@ -9,8 +9,8 @@ class Main extends Component {
   render() {
     return (
     	<main>
-    		<CategoryField className="categoryField" />	
-        <TaskField className="taskField" />
+    		<CategoryField />	
+        <TaskField />
     	</main>
     );
   }

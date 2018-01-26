@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import store from './store';
+import { createStore } from 'redux';
+import appReducer from './reducers/appReducer';
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Router, Route } from 'react-router';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { Route } from 'react-router';
+import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
 
+
+const store = createStore(appReducer);
+// window.store = store;s
 
 const history = createHistory()
 

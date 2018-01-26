@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import './SearchBar.css';
 import { connect } from 'react-redux'
-import { filterTaskBySearchQuery, filterTaskByDone } from '../actions/appActions';
+import { 
+  filterTaskBySearchQuery, 
+  filterTaskByDone 
+} from '../actions/appActions';
 import { clearSearchQuery } from '../actions/appActions';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import ContentBackspace from 'material-ui/svg-icons/content/backspace';
 
 class SearchBar extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {

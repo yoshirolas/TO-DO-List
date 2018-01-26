@@ -7,18 +7,9 @@ main {
   background: rgba(0, 188, 212, 0.1);
 }
 
-header {
-  width: 90%;
+@media (max-width: 560px) {
+	main {
+		width: 100%;
+	}
 }
 
-.categoryField {
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.taskField {
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-}

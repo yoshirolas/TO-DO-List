@@ -1,5 +1,13 @@
-.footerContainer {
+footer {
 	width: 90%;
 	height: 50px;
 	background: rgb(0, 188, 212);
+}
+
+@media (max-width: 560px) {
+
+	footer {
+		width: 100%;
+	}
+	
 }

@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 class TaskInputForm extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,19 +26,22 @@ class TaskInputForm extends Component {
   }
 
   handleTaskInputChange = (event) => {
+
     this.setState({
       taskInputValue: event.target.value,
     });
   }
 
   render() {
+
     const style = {
       margin: 1,
       height: 30,
       minWidth: 0,
     };
 
-    if (!this.props.categoryList.find(item => item.clicked) &&
+    if (
+      !this.props.categoryList.find(item => item.clicked) &&
       !this.props.categoryList.find(item => item.child)
     ) {
       return (

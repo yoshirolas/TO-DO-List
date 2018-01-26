@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import './TaskTree.css';
 import { connect } from 'react-redux';
-import { doneTask, showTaskDescription, saveTaskDescription } from '../actions/appActions';
+import { 
+  doneTask, 
+  showTaskSettings, 
+  closeTaskSettings, 
+  saveTaskSettings 
+} from '../actions/appActions';
 import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import ActionDescription from 'material-ui/svg-icons/action/description';
+import ContentSave from 'material-ui/svg-icons/content/save';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 
 class TaskTree extends Component {
@@ -13,13 +21,22 @@ class TaskTree extends Component {
   }
 
   showTaskDescription = (item) => () => {
-    this.props.dispatch(showTaskDescription(item.taskId));
+    this.props.dispatch(showTaskSettings(item.taskId));
   }
 
-  saveTaskDescription = () => (event) => {
-    console.log(this.taskDescription.value)
+  closeTaskDescription = () => () => {
+    this.props.dispatch(closeTaskSettings());
+  }
+
+  saveTaskSettings = () => (event) => {
+
     event.preventDefault();
-    this.props.dispatch(saveTaskDescription(this.taskDescription.value, this.props.taskDescription.taskId));
+    this.props.dispatch(closeTaskSettings());
+    this.props.dispatch(saveTaskSettings(
+      this.taskNewName.value,
+      this.taskNewDescription.value, 
+      this.props.taskDescription.taskId
+    ));
   }
 
   createTask = (item) => {
@@ -61,58 +78,88 @@ class TaskTree extends Component {
   }
   
   render() {
+
     let clickedCategory;
-
-    console.log(this.props.taskDescription.taskId)
-
     if (this.props.taskDescription.taskId) {
-      console.log(this.props.taskList)
       if (!this.props.taskList.find(item => item.clicked)) {
-        const children = this.props.children.find(item => item.child.find(it => it.clicked))
+        const children = this.props.children.find(
+          item => item.child.find(
+            item => item.clicked
+          )
+        )
         if (children) {
           clickedCategory = children.child.find(item => item.clicked);
         }
       } else {
         clickedCategory = this.props.taskList.find(item => item.clicked);
       }
-      console.log(clickedCategory)
       const taskItem = clickedCategory.taskList.find(
         item => item.taskId === this.props.taskDescription.taskId
       );
-      console.log(taskItem)
+      const taskName = taskItem.taskName; 
       const taskDescription = taskItem.description;
+      const style = {
+        margin: 5,
+        height: 25,
+        widthMin: 100,
+      }
 
       return (
-        <div>
-          <h3>
-            { taskItem.taskName }
-          </h3>
+        <div className="taskDescription">
           <form>
+            <span>
+              Title:
+            </span>
             <input 
-              defaultValue={ taskDescription } 
-              type='text'
-              ref={input => this.taskDescription = input}
+              className="taskNameInput"
+              defaultValue={ taskName }
+              ref={input => this.taskNewName = input} 
             >
             </input>
-            <div onClick={ this.saveTaskDescription() }>
-              save
+            <span>
+              Description:
+            </span>
+            <textarea 
+              className="taskDescriptionInput" 
+              defaultValue={ taskDescription } 
+              type='text'
+              ref={input => this.taskNewDescription = input}
+            >
+            </textarea>
+            <div className="taskDescriptionBtnContainer">
+              <RaisedButton 
+                onClick={ this.saveTaskSettings() } 
+                style={style} 
+                secondary={true}
+              >
+                <ContentSave />
+              </RaisedButton>
+              <RaisedButton 
+                onClick={ this.closeTaskDescription() } 
+                style={style} 
+                secondary={true}
+              >
+                <NavigationClose />
+              </RaisedButton>
             </div>
           </form>
         </div>
-
       )
     }
-
     
-    if (!this.props.taskList.find(item => item.clicked) && !this.props.taskDescription.taskId) {
+    if (
+      !this.props.taskList.find(item => item.clicked) 
+      && !this.props.taskDescription.taskId
+      ) {
       if (this.props.children.length > 0) {
-        console.log(this.props.children)
-        const children = this.props.children.find(item => item.child.find(it => it.clicked))
+        const children = this.props.children.find(
+          item => item.child.find(
+            item => item.clicked
+          )
+        )
         if (children) {
           clickedCategory = children.child.find(item => item.clicked);
-          console.log(clickedCategory)
-          const taskList = clickedCategory.taskList.map(this.createTask);
-          console.log(taskList)
+          clickedCategory.taskList.map(this.createTask);
         } else {
           return ( 
             <ul>
@@ -133,7 +180,10 @@ class TaskTree extends Component {
       item => item.taskName.indexOf(this.props.search.searchQuery) !== -1
     );
     let taskList;
-    if (this.props.search.useFilter && !this.props.taskDescription.taskId) {
+    if (
+      this.props.search.useFilter 
+      && !this.props.taskDescription.taskId
+    ) {
       let filterTaskByDone = filterTaskBySearchQuery.filter(
         item => item.done === this.props.search.searchDone
       );
@@ -153,7 +203,9 @@ class TaskTree extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     taskList: state.changeCategoryTree,
-    children: state.changeCategoryTree.filter(item => (item.child.length > 0)),
+    children: state.changeCategoryTree.filter(
+      item => (item.child.length > 0)
+    ),
     search: state.changeSearchQuery,
     taskDescription: state.showTaskDescription,
   }

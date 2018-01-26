@@ -7,9 +7,9 @@ const categoryDefaultItem = {
 	searchQuery: '',
 	taskList: [
 		{
-			taskName: 'Task 1',
+			taskName: 'To sleep',
 			taskId: 1,
-			description: '',
+			description: 'To sleep on this weekend',
 			done: false,
 		}
 	]

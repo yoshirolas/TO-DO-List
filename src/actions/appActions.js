@@ -51,13 +51,18 @@ export const clearSearchQuery = () => ({
   type: 'CLEAR_SEARCH_QUERY',
 });
 
-export const showTaskDescription = (id) => ({
-  type: 'SHOW_TASK_DESCRIPTION',
+export const showTaskSettings = (id) => ({
+  type: 'SHOW_TASK_SETTINGS',
   id,
 });
 
-export const saveTaskDescription = (description, id) => ({
-  type: 'SAVE_TASK_DESCRIPTION',
+export const closeTaskSettings = () => ({
+  type: 'CLOSE_TASK_SETTINGS',
+});
+
+export const saveTaskSettings = (name, description, id) => ({
+  type: 'SAVE_TASK_SETTINGS',
+  name,
   description,
   id,
 });

@@ -4,11 +4,13 @@ const initState = {
 
 function showTaskDescription (state = initState, action) {
   switch (action.type) {
-    case 'SHOW_TASK_DESCRIPTION': {
 
+    case 'SHOW_TASK_SETTINGS': {
+      
       return {...state, taskId: action.id}
     }
-    case 'SAVE_TASK_DESCRIPTION': {
+
+    case 'CLOSE_TASK_SETTINGS': {
 
       return {...state, taskId: null}
     }

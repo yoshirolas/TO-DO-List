@@ -13,7 +13,10 @@ function changeSearchQuery (state = initState, action) {
 
     case 'FILTER_TASK_BY_DONE': {
 
-      return {...state, searchDone: !state.searchDone, useFilter: !state.useFilter}
+      return {...state, 
+        searchDone: !state.searchDone, 
+        useFilter: !state.useFilter
+      }
     }
 
     case 'CLEAR_SEARCH_QUERY': {
