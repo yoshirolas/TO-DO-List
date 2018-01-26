@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { delCategory } from './actions/appActions';
+import { delCategory } from '../actions/appActions';
 import IconButton from 'material-ui/IconButton';
 import ActionDeleteForever from 'material-ui/svg-icons/action/delete-forever';
 

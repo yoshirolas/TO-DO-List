@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { renameCategory } from './actions/appActions';
+import { renameCategory } from '../actions/appActions';
 import IconButton from 'material-ui/IconButton';
 import ImageEdit from 'material-ui/svg-icons/image/edit';
 

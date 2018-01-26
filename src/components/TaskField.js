@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import './CategoryField.css';
-import TaskTree from './TaskTree';
-import TaskInputForm from './TaskInputForm';
+import TaskTree from '../containers/TaskTree';
+import TaskInputForm from '../containers/TaskInputForm';
 
 
 class TaskField extends Component {

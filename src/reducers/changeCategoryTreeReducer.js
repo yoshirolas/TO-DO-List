@@ -1,11 +1,10 @@
-// import { combineReducers } from 'redux';
-import initialState from '../initState';
+import defaultDataStructure from '../constants/defaultDataStructure';
 
-
+const initState = defaultDataStructure;
 let uniqueCategoryId = 2;  
 let uniqueTaskId = 2; 
 
-function changeCategoryTree (state = initialState.categoryList, action) {
+function changeCategoryTree (state = initState.categoryList, action) {
 	console.log(action)
 	switch (action.type) {
 		case 'ADD_CATEGORY': { 
@@ -142,6 +141,28 @@ function changeCategoryTree (state = initialState.categoryList, action) {
 				taskItem = categoryItem.taskList.find(item => item.taskId === action.id);
 				taskItem.done = !taskItem.done;
 			}
+
+			return stateCopy;
+		}
+
+		case 'SAVE_TASK_DESCRIPTION': {
+			let stateCopy = [...state];
+			let taskItem;
+			let clickedCategory;
+			if (!stateCopy.find(item => item.clicked)) {
+				const children = stateCopy.find(item => item.child.find(it => it.clicked))
+				clickedCategory = children.child.find(item => item.clicked);
+				taskItem = clickedCategory.taskList.find(item => item.taskId === action.id);
+			} else {
+				console.log(stateCopy)
+        clickedCategory = stateCopy.find(item => item.clicked);
+      }
+      taskItem = clickedCategory.taskList.find(
+        item => item.taskId === action.id
+      );
+      console.log(action.id)
+      console.log(taskItem)
+      taskItem.description = action.description;
 
 			return stateCopy;
 		}

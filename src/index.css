@@ -9,6 +9,11 @@
   user-select: none;  
 }
 
+a {
+  text-decoration:none;
+  color: black;
+}
+
 body {
 	max-width: 900px;
 }

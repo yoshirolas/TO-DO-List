@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import './Header.css';
-import SearchBar from './SearchBar';
-import ProgressBar from './ProgressBar';
+import SearchBar from '../containers/SearchBar';
+import ProgressBar from '../containers/ProgressBar';
 
 
 class Header extends Component {

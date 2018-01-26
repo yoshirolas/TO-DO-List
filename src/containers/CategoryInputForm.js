@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './CategoryInputForm.css';
 import { connect } from 'react-redux'
-import { addCategory } from './actions/appActions';
+import { addCategory } from '../actions/appActions';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
@@ -34,7 +34,7 @@ class CategoryInputForm extends Component {
   	const style = {
   		margin: 1,
   		height: 30,
-  		'min-width': 0,
+  		minWidth: 0,
 		};
 
     return (

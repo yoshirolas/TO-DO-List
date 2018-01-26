@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import './CategoryField.css';
-import CategoryTree from './CategoryTree';
-import CategoryInputForm from './CategoryInputForm';
+import CategoryTree from '../containers/CategoryTree';
+import CategoryInputForm from '../containers/CategoryInputForm';
 
 
 class CategoryField extends Component {

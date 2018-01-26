@@ -51,4 +51,13 @@ export const clearSearchQuery = () => ({
   type: 'CLEAR_SEARCH_QUERY',
 });
 
+export const showTaskDescription = (id) => ({
+  type: 'SHOW_TASK_DESCRIPTION',
+  id,
+});
 
+export const saveTaskDescription = (description, id) => ({
+  type: 'SAVE_TASK_DESCRIPTION',
+  description,
+  id,
+});

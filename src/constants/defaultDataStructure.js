@@ -8,17 +8,17 @@ const categoryDefaultItem = {
 	taskList: [
 		{
 			taskName: 'Task 1',
-			taskId: 0,
+			taskId: 1,
 			description: '',
 			done: false,
 		}
 	]
 }
 
-const initialState = {
+const defaultDataStructure = {
 	categoryList: [
 		categoryDefaultItem,
 	],
 }
 
-export default initialState;
+export default defaultDataStructure;
