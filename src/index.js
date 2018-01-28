@@ -13,7 +13,7 @@ import createHistory from 'history/createBrowserHistory';
 
 
 const store = createStore(appReducer);
-// window.store = store;s
+// window.store = store;
 
 const history = createHistory()
 

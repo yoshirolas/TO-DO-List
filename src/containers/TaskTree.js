@@ -79,6 +79,8 @@ class TaskTree extends Component {
   
   render() {
 
+    console.log(this.props.match.params)
+
     let clickedCategory;
     if (this.props.taskDescription.taskId) {
       if (!this.props.taskList.find(item => item.clicked)) {

@@ -5,6 +5,7 @@ import RenameCategoryButton from './RenameCategoryButton';
 import DeleteCategoryButton from './DeleteCategoryButton';
 import AddChildrenCategoryButton from './AddChildrenCategoryButton';
 import { clickCategory, closeTaskSettings } from '../actions/appActions';
+import { Link } from 'react-router-dom'
 
 
 class CategoryTree extends Component {
@@ -22,7 +23,8 @@ class CategoryTree extends Component {
   	return (
   		<ul key={ item.categoryId }>
 				<li
-          className={ item.clicked 
+          className={ 
+            item.clicked 
             ? "categoryChildClickedItem" 
             : "categoryChildItem" 
           }
@@ -46,7 +48,7 @@ class CategoryTree extends Component {
   }
 
 	createCategory = (item) => {
-
+    console.log(item.categoryName)
 		let childCategoryList;
 		if (item.child.length > 0) {
 			childCategoryList = item.child.map(this.createChildCategory)
@@ -54,14 +56,17 @@ class CategoryTree extends Component {
 
 		return (
       <ul key={item.categoryId}>
+
   			<li 
-          className={ item.clicked 
+          className={ 
+            item.clicked 
             ? "categoryParentClickedItem" 
             : "categoryParentItem" 
           }
           key={ item.categoryId } 
           onClick={ this.categoryCliked(item) }
         >
+
           <h3 className="categoryTitle">
             { item.categoryName }
           </h3>
@@ -77,6 +82,7 @@ class CategoryTree extends Component {
             ? <div></div>
             : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
           }
+
   			</li> 
         { childCategoryList }
       </ul> 	
@@ -84,6 +90,7 @@ class CategoryTree extends Component {
 	}
 	
   render() {
+
   	let categoryList = this.props.categoryList.map(this.createCategory);
     return (
   		<ul className="categoryList">
