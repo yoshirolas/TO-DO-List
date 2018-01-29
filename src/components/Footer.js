@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 class Footer extends Component {
@@ -8,9 +8,7 @@ class Footer extends Component {
     const asd=5;
     return (
       <footer>
-         <li><Link to={{
-          pathname: '/category/'
-        }}>link</Link></li>
+         <li><Link to={`/category/${asd}`}>link</Link></li>
       </footer>
     );
   }

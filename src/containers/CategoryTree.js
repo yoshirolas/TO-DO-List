@@ -5,7 +5,7 @@ import RenameCategoryButton from './RenameCategoryButton';
 import DeleteCategoryButton from './DeleteCategoryButton';
 import AddChildrenCategoryButton from './AddChildrenCategoryButton';
 import { clickCategory, closeTaskSettings } from '../actions/appActions';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 
 class CategoryTree extends Component {
@@ -56,7 +56,6 @@ class CategoryTree extends Component {
 
 		return (
       <ul key={item.categoryId}>
-
   			<li 
           className={ 
             item.clicked 
@@ -66,23 +65,23 @@ class CategoryTree extends Component {
           key={ item.categoryId } 
           onClick={ this.categoryCliked(item) }
         >
-
-          <h3 className="categoryTitle">
-            { item.categoryName }
-          </h3>
-  				<RenameCategoryButton 
-            categoryId={ item.categoryId } 
-            parentCategoryId={ item.parentCategoryId } 
-          />
-  				<DeleteCategoryButton 
-            categoryId={ item.categoryId } 
-            parentCategoryId={ item.parentCategoryId } 
-          />
-  				{ !item.child 
-            ? <div></div>
-            : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
-          }
-
+          <Link to={`/category/${item.categoryName}`}>
+            <h3 className="categoryTitle">
+              { item.categoryName }
+            </h3>
+    				<RenameCategoryButton 
+              categoryId={ item.categoryId } 
+              parentCategoryId={ item.parentCategoryId } 
+            />
+    				<DeleteCategoryButton 
+              categoryId={ item.categoryId } 
+              parentCategoryId={ item.parentCategoryId } 
+            />
+    				{ !item.child 
+              ? <div></div>
+              : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
+            }
+          </Link>
   			</li> 
         { childCategoryList }
       </ul> 	
