@@ -1,4 +1,5 @@
 import defaultDataStructure from '../constants/defaultDataStructure';
+import undoable, { includeAction } from 'redux-undo'
 
 const initState = defaultDataStructure;
 let uniqueCategoryId = 2;  
@@ -195,14 +196,11 @@ function changeCategoryTree (state = initState.categoryList, action) {
 					item => item.taskId === action.id
 				);
 			} else {
-				console.log(stateCopy)
         clickedCategory = stateCopy.find(item => item.clicked);
       }
       taskItem = clickedCategory.taskList.find(
         item => item.taskId === action.id
       );
-      console.log(action.id)
-      console.log(taskItem)
       taskItem.description = action.description;
       taskItem.taskName = action.name;
 
@@ -214,4 +212,13 @@ function changeCategoryTree (state = initState.categoryList, action) {
 	}
 }
 
-export default changeCategoryTree;
+const undoableTodos = undoable(
+	changeCategoryTree, { 
+		filter: includeAction([
+			'DEL_CATEGORY',
+			'ADD_CATEGORY',
+			]) 
+	}
+)
+
+export default undoableTodos

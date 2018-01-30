@@ -204,8 +204,8 @@ class TaskTree extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    taskList: state.changeCategoryTree,
-    children: state.changeCategoryTree.filter(
+    taskList: state.changeCategoryTree.present,
+    children: state.changeCategoryTree.present.filter(
       item => (item.child.length > 0)
     ),
     search: state.changeSearchQuery,

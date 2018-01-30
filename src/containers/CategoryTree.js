@@ -48,7 +48,7 @@ class CategoryTree extends Component {
   }
 
 	createCategory = (item) => {
-    console.log(item.categoryName)
+
 		let childCategoryList;
 		if (item.child.length > 0) {
 			childCategoryList = item.child.map(this.createChildCategory)
@@ -65,23 +65,23 @@ class CategoryTree extends Component {
           key={ item.categoryId } 
           onClick={ this.categoryCliked(item) }
         >
-          <Link to={`/category/${item.categoryName}`}>
-            <h3 className="categoryTitle">
+          <h3 className="categoryTitle">
+            <Link to={`/category/${item.categoryName}`}>
               { item.categoryName }
-            </h3>
-    				<RenameCategoryButton 
-              categoryId={ item.categoryId } 
-              parentCategoryId={ item.parentCategoryId } 
-            />
-    				<DeleteCategoryButton 
-              categoryId={ item.categoryId } 
-              parentCategoryId={ item.parentCategoryId } 
-            />
-    				{ !item.child 
-              ? <div></div>
-              : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
-            }
-          </Link>
+            </Link>
+          </h3>
+  				<RenameCategoryButton 
+            categoryId={ item.categoryId } 
+            parentCategoryId={ item.parentCategoryId } 
+          />
+  				<DeleteCategoryButton 
+            categoryId={ item.categoryId } 
+            parentCategoryId={ item.parentCategoryId } 
+          />
+  				{ !item.child 
+            ? <div></div>
+            : <AddChildrenCategoryButton categoryId={ item.categoryId } /> 
+          }
   			</li> 
         { childCategoryList }
       </ul> 	
@@ -101,7 +101,7 @@ class CategoryTree extends Component {
 
 function mapStateToProps(state) {
 	return {
-		categoryList: state.changeCategoryTree
+		categoryList: state.changeCategoryTree.present
 	}
 }
 

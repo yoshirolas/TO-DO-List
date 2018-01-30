@@ -52,7 +52,7 @@ class ProgressBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    categoryList: state.changeCategoryTree,
+    categoryList: state.changeCategoryTree.present,
   }
 }
 
