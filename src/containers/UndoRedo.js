@@ -1,16 +1,24 @@
 import React from 'react';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
 
 let UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }) => (
-  <p>
-    <button onClick={onUndo} disabled={!canUndo}>
-      Undo
-    </button>
-    <button onClick={onRedo} disabled={!canRedo}>
-      Redo
-    </button>
-  </p>
+
+  <div>
+    <RaisedButton 
+      label="Undo"
+      type='submit'
+      onClick={onUndo}
+      disabled={!canUndo} 
+    />
+    <RaisedButton 
+      label="Redo"
+      type='submit'
+      onClick={onRedo}
+      disabled={!canRedo}
+    />
+  </div>
 )
 
 const mapStateToProps = (state) => ({

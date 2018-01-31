@@ -12,7 +12,7 @@ class TaskField extends Component {
     return (
       <section className="taskField" >
         <TaskInputForm /> 
-        <Route path='/category' component={ TaskTree } />
+        <Route path='/category/:categoryName' component={ TaskTree } />
       </section>
     );
   }
